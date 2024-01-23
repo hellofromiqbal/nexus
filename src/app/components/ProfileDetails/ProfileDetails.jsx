@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import { joinedDate } from '@/helpers/moment';
+import FollowButton from '../Buttons/Follow/FollowButton';
 
 const ProfileDetails = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -41,7 +42,7 @@ const ProfileDetails = ({ details }) => {
           {details?._id === currentUser?._id ?
             <Link href={`/dashboard/profile/1/edit`} className="px-4 py-1 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-full w-max">Edit</Link>
             :
-            <button className="px-4 py-1 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-full w-max">Follow</button>
+            <FollowButton currentUserId={currentUser?._id} details={details}/>
           }
         </div>
       </div>
