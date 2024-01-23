@@ -1,23 +1,31 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import {
   IoHome,
   IoSearch,
   IoNotifications,
   IoMail,
-  IoExit
 } from "react-icons/io5";
 import { FaUserFriends, FaUserCircle } from "react-icons/fa";
 import LogoutButton from '../Buttons/Logout/LogoutButton';
 
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '@/store/currentUserSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCurrentUser, selectCurrentUser } from '@/store/currentUserSlice';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch('/api/users/me')
+      .then((res) => res.json())
+      .then((data) => dispatch(setCurrentUser(data.data)))
+      .catch((err) => console.log(err.message));
+  }, []);
+
   const currentUser = useSelector(selectCurrentUser);
-  console.log(currentUser);
 
   return (
     <nav>
@@ -53,7 +61,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className='flex'>
-          <Link href={'/dashboard/profile/1'} className='p-4 w-full font-medium text-white hover:text-black hover:bg-green-500 flex items-center gap-4'>
+          <Link href={`/dashboard/profile/${currentUser?.username}`} className='p-4 w-full font-medium text-white hover:text-black hover:bg-green-500 flex items-center gap-4'>
             <FaUserCircle className='w-[25px] h-[25px]'/>
             <span>Profile</span>
           </Link>
