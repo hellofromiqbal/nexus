@@ -8,6 +8,7 @@ import {
   IoExit
 } from "react-icons/io5";
 import { FaUserFriends, FaUserCircle } from "react-icons/fa";
+import LogoutButton from '../Buttons/Logout/LogoutButton';
 
 const Navbar = () => {
   return (
@@ -50,10 +51,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className='flex'>
-          <Link href={'/dashboard'} className='p-4 w-full font-medium text-white hover:text-black hover:bg-green-500 flex items-center gap-4'>
-            <IoExit className='w-[25px] h-[25px]'/>
-            <span>Logout</span>
-          </Link>
+          <LogoutButton/>
         </li>
       </ul>
     </nav>
