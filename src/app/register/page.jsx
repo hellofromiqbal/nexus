@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import RegisterForm from '../components/Forms/Register/RegisterForm';
 
 export default function RegisterPage() {
