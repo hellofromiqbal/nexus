@@ -11,7 +11,11 @@ import { loginFormSchema } from '@/helpers/zodSchema';
 import Spinner from '../../Spinner/Spinner';
 import { notifySuccess, notifyFailed } from '@/helpers/toaster';
 
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '@/store/currentUserSlice';
+
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: zodResolver(loginFormSchema) });
@@ -31,6 +35,7 @@ const LoginForm = () => {
       } else {
         reset();
         const result = await res.json();
+        dispatch(setCurrentUser(result.data));
         notifySuccess(result.message);
         router.push("/dashboard");
       };

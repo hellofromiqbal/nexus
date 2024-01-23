@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import Link from 'next/link';
 import {
@@ -10,7 +12,13 @@ import {
 import { FaUserFriends, FaUserCircle } from "react-icons/fa";
 import LogoutButton from '../Buttons/Logout/LogoutButton';
 
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '@/store/currentUserSlice';
+
 const Navbar = () => {
+  const currentUser = useSelector(selectCurrentUser);
+  console.log(currentUser);
+
   return (
     <nav>
       <ul className='flex flex-col'>

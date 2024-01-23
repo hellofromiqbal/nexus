@@ -27,7 +27,8 @@ export const POST = async (request, response) => {
 
     const response = NextResponse.json({
       success: true,
-      message: 'Logged in.'
+      message: 'Logged in.',
+      data: document
     }, { status: 200 });
 
     const tokenPayload = {...document};

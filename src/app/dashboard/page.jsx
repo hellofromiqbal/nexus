@@ -1,6 +1,5 @@
 import React from 'react';
 import CreatePostForm from '../components/Forms/CreatePost/CreatePostForm';
-import PostCard from '../components/PostCard/PostCard';
 import PostList from '../components/PostList/PostList';
 
 const DashboardPage = () => {
