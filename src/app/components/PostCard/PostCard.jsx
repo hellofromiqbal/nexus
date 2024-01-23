@@ -10,8 +10,12 @@ import {
   FaRegTrashCan,
   FaTrash
 } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '@/store/currentUserSlice';
+import DeletePostButton from '../Buttons/DeletePost/DeletePostButton';
 
 const PostCard = ({ details }) => {
+  const currentUser = useSelector(selectCurrentUser);
   return (
     <div className='p-4 flex gap-4'>
       <div>
@@ -35,9 +39,11 @@ const PostCard = ({ details }) => {
             <FaRegComment className='text-white w-[18px] h-[18px]'/>
             <small className='text-white'>{details?.replies?.length}</small>
           </Link>
-          {/* <button className='flex gap-2'>
-            <FaRegTrashCan className='text-white w-[18px] h-[18px]'/>
-          </button> */}
+          {details?.author?.username === currentUser?.username ?
+            <DeletePostButton id={details?._id} currentUserId={currentUser?._id}/>
+            :
+            ''
+          }
         </div>
       </div>
     </div>
