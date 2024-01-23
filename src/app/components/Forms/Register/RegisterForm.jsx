@@ -9,15 +9,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { registerFormSchema } from '@/helpers/zodSchema';
 
 import Spinner from '../../Spinner/Spinner';
-import { notifyFailed, notifySuccess } from '@/helpers/toaster';
+import { notifySuccess, notifyFailed } from '@/helpers/toaster';
 
 const RegisterForm = () => {
   const router = useRouter();
-  const [isValidating, setIsValidating] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: zodResolver(registerFormSchema) });
 
   const submittedData = async (data) => {
-    setIsValidating((prev) => !prev);
+    setIsLoading((prev) => !prev);
     try {
       const res = await fetch('/api/users/register', {
         cache: 'no-store',
@@ -37,7 +37,7 @@ const RegisterForm = () => {
     } catch (error) {
       notifyFailed(error.message);
     };
-    setIsValidating((prev) => !prev);
+    setIsLoading((prev) => !prev);
   };
 
   return (
@@ -79,9 +79,9 @@ const RegisterForm = () => {
           </div>
         </div>
         <button
-          className={`py-2 bg-green-500 hover:bg-green-600 text-white rounded-full ${isValidating && 'bg-slate-500 hover:bg-slate-500'} flex justify-center items-center`}
-          disabled={isValidating}
-        >{isValidating ? <Spinner/> : 'Register'}</button>
+          className={`py-2 bg-green-500 hover:bg-green-600 text-white rounded-full ${isLoading && 'bg-slate-500 hover:bg-slate-500'} flex justify-center items-center`}
+          disabled={isLoading}
+        >{isLoading ? <Spinner/> : 'Register'}</button>
       </form>
       <div className="flex justify-center">
         <p className="text-sm text-white">Already have an account? <Link href={'/'} className="text-green-500 hover:text-green-600 underline">Login</Link> here.</p>

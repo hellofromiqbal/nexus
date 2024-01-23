@@ -14,3 +14,10 @@ export const registerFormSchema = z.object({
   message: "Password do not match",
   path: ["confirmPassword"]
 });
+
+export const loginFormSchema = z.object({
+  email: z.string().email({ message: "Email is required and must be in a correct format." }),
+  password: z.string({
+    required_error: "Password is required"
+  }).min(6, { message: "Password at least 6 or more characters long." }).max(20, { message: "Password at least 20 or fewer characters long." }),
+});
