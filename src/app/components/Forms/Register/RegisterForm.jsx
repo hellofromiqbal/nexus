@@ -1,15 +1,18 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerFormSchema } from '@/helpers/zodSchema';
+
 import Spinner from '../../Spinner/Spinner';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [isValidating, setIsValidating] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: zodResolver(registerFormSchema) });
 
@@ -29,6 +32,7 @@ const RegisterForm = () => {
         reset();
         const result = await res.json();
         notifySuccess(result.message);
+        router.push("/");
       }
     } catch (error) {
       notifyFailed(error.message);
