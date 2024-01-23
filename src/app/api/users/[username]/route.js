@@ -11,6 +11,12 @@ export const GET = async (request, { params }) => {
         path: 'author',
         method: 'User'
       })
+    }).populate({
+      path: 'likes',
+      populate: ({
+        path: 'author',
+        method: 'User'
+      })
     });
     if(!document) {
       return NextResponse.json({
