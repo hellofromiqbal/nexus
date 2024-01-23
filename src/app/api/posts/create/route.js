@@ -22,6 +22,9 @@ export const POST = async (request, response) => {
       textContent
     });
 
+    document.posts.push(newPost._id);
+    document.save();
+
     return NextResponse.json({
       success: true,
       message: 'Posted.',
