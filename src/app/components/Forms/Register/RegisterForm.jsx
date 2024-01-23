@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerFormSchema } from '@/helpers/zodSchema';
 import Spinner from '../../Spinner/Spinner';
+import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 
 const RegisterForm = () => {
   const [isValidating, setIsValidating] = useState(false);
@@ -26,10 +27,11 @@ const RegisterForm = () => {
         throw new Error(result.error);
       } else {
         reset();
-        console.log('New account has been created!');
+        const result = await res.json();
+        notifySuccess(result.message);
       }
     } catch (error) {
-      console.log(error.message);
+      notifyFailed(error.message);
     };
     setIsValidating((prev) => !prev);
   };
