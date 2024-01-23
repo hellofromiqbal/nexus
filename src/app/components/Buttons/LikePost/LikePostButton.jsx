@@ -26,13 +26,39 @@ const LikePostButton = ({ currentUserId, details }) => {
       notifyFailed(error.message);
     };
   };
+  const handleUnlikeButton = async () => {
+    try {
+      const res = await fetch(`/api/posts/likes/`, {
+        cache: 'no-store',
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentUserId, postId: details?._id })
+      });
+
+      if(!res.ok) {
+        const result = await res.json();
+        throw new Error(result.message);
+      } else {
+        const result = await res.json();
+        notifySuccess(result.message);
+      };
+    } catch (error) {
+      notifyFailed(error.message);
+    };
+  };
+  console.log(details);
+  const isPostAlreadyLiked = details?.likes?.find((userId) => userId === currentUserId);
 
   return (
     <button
       className='flex gap-2'
-      onClick={handleLikeButton}
+      onClick={isPostAlreadyLiked ? handleUnlikeButton : handleLikeButton}
     >
-      <FaRegHeart className='text-white w-[18px] h-[18px]'/>
+      {isPostAlreadyLiked ?
+        <FaHeart className='text-white w-[18px] h-[18px]'/>
+        :
+        <FaRegHeart className='text-white w-[18px] h-[18px]'/>
+      }
       <small className='text-white'>{details?.likes?.length}</small>
     </button>
   )
