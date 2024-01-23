@@ -14,6 +14,7 @@ import LogoutButton from '../Buttons/Logout/LogoutButton';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser, selectCurrentUser } from '@/store/currentUserSlice';
+import { setCurrentPosts } from '@/store/currentPostsSlice';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,13 @@ const Navbar = () => {
     fetch('/api/users/me')
       .then((res) => res.json())
       .then((data) => dispatch(setCurrentUser(data.data)))
+      .catch((err) => console.log(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/posts/')
+      .then((res) => res.json())
+      .then((data) => dispatch(setCurrentPosts(data.data)))
       .catch((err) => console.log(err.message));
   }, []);
 

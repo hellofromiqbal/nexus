@@ -16,7 +16,7 @@ export const POST = async (request, response) => {
         message: 'User not found.'
       }, { status: 404 });
     };
-    
+
     const newPost = await Post.create({
       author: authorId,
       textContent

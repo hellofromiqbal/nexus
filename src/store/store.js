@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import currentUser from './currentUserSlice';
+import currentPosts from './currentPostsSlice';
 import visitedUser from './visitedUserSlice';
 
 const store = configureStore({
   reducer: {
     currentUser: currentUser,
-    visitedUser: visitedUser
+    currentPosts: currentPosts,
+    visitedUser: visitedUser,
   }
 });
 

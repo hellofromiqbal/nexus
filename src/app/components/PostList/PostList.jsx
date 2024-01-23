@@ -4,9 +4,9 @@ import PostCard from '../PostCard/PostCard';
 const PostList = ({ list }) => {
   return (
     <>
-      <PostCard/>
-      <PostCard/>
-      <PostCard/>
+      {list?.map((item) => (
+        <PostCard key={item?._id} details={item}/>
+      ))}
     </>
   )
 };
