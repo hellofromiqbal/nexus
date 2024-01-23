@@ -21,3 +21,7 @@ export const loginFormSchema = z.object({
     required_error: "Password is required"
   }).min(6, { message: "Password at least 6 or more characters long." }).max(20, { message: "Password at least 20 or fewer characters long." }),
 });
+
+export const createPostFormSchema = z.object({
+  textContent: z.string().min(1, { message: "Text content must be at least 1 or more characters long. "}).max(1000, { message: "Text content must be 1000 or fewer characters long." }),
+});
