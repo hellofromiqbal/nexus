@@ -13,6 +13,7 @@ import {
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import DeletePostButton from '../Buttons/DeletePost/DeletePostButton';
+import LikePostButton from '../Buttons/LikePost/LikePostButton';
 
 const PostCard = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -31,10 +32,7 @@ const PostCard = ({ details }) => {
           <p className='text-white text-opacity-70'>{details?.textContent}</p>
         </div>
         <div className='flex justify-end gap-8'>
-          <button className='flex gap-2'>
-            <FaRegHeart className='text-white w-[18px] h-[18px]'/>
-            <small className='text-white'>{details?.likes?.length}</small>
-          </button>
+          <LikePostButton currentUserId={currentUser?._id} details={details}/>
           <Link href={"/dashboard/posts/1"} className='flex justify-end gap-2'>
             <FaRegComment className='text-white w-[18px] h-[18px]'/>
             <small className='text-white'>{details?.replies?.length}</small>
