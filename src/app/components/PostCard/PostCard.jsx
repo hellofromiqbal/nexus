@@ -19,8 +19,8 @@ const PostCard = ({ details }) => {
       </div>
       <div className='flex flex-col w-full'>
         <div className='flex items-center gap-2'>
-          <Link href={`/dashboard/profile/1`} className='text-white'>{details?.author?.fullname}</Link>
-          <Link href={`/dashboard/profile/1`} className='text-sm text-white text-opacity-70'>{details?.author?.username}</Link>
+          <Link href={`/dashboard/profile/${details?.author?.username}`} className='text-white'>{details?.author?.fullname}</Link>
+          <Link href={`/dashboard/profile/${details?.author?.username}`} className='text-sm text-white text-opacity-70'>{details?.author?.username}</Link>
           <p className='text-sm text-white text-opacity-70'>12/28/2023 - 3:00 PM</p>
         </div>
         <div>
