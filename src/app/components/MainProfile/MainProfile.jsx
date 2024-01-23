@@ -17,6 +17,7 @@ const MainProfile = () => {
   const username = decodeURIComponent(params.username);
   const [showPosts, setShowPosts] = useState('posts');
   const currentVisitedUser = useSelector(selectVisitedUser);
+  
   useEffect(() => {
     fetch(`/api/users/${username}`)
       .then((res) => res.json())

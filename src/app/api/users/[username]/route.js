@@ -5,7 +5,13 @@ import { NextResponse } from 'next/server';
 export const GET = async (request, { params }) => {
   try {
     await connectMongoDB();
-    const document = await User.findOne({ username: params.username });
+    const document = await User.findOne({ username: params.username }).populate({
+      path: 'posts',
+      populate: ({
+        path: 'author',
+        method: 'User'
+      })
+    });
     if(!document) {
       return NextResponse.json({
         success: false,
