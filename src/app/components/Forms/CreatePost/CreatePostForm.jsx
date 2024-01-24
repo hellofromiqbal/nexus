@@ -15,8 +15,6 @@ import { addNewPost, selectCurrentPosts } from '@/store/currentPostsSlice';
 const CreatePostForm = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-  const currentPosts = useSelector(selectCurrentPosts);
-  console.log(currentPosts);
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm({ resolver: zodResolver(createPostFormSchema) });
 
