@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,12 +9,16 @@ import { createPostFormSchema } from '@/helpers/zodSchema';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
+import Spinner from '../../Spinner/Spinner';
 
 const CreatePostForm = () => {
   const currentUser = useSelector(selectCurrentUser);
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm({ resolver: zodResolver(createPostFormSchema) });
+
   const submittedData = async (data) => {
     if(data.textContent.length < 1) return;
+    setIsLoading((prev) => !prev);
     try {
       const res = await fetch('/api/posts/create', {
         cache: 'no-store',
@@ -34,6 +38,7 @@ const CreatePostForm = () => {
     } catch (error) {
       notifyFailed(error.message);
     };
+    setIsLoading((prev) => !prev);
   };
 
   return (
@@ -46,7 +51,12 @@ const CreatePostForm = () => {
         className='px-4 py-2 h-24 rounded-md resize-none bg-transparent border text-white'
         {...register('textContent')}
       ></textarea>
-      <button className="py-2 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-full">Post</button>
+      <button
+        className={`py-2 text-black font-semibold rounded-full ${isLoading ? 'bg-gray-500 hover:bg-gray-500' : 'bg-green-500 hover:bg-green-600'} flex justify-center items-center`}
+        disabled={isLoading}
+      >
+        {isLoading ? <Spinner/> : 'Post'}
+      </button>
     </form>
   )
 };
