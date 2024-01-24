@@ -14,6 +14,13 @@ export const GET = async (request, { params }) => {
         path: 'author',
         method: 'User'
       }
+    })
+    .populate({
+      path: 'replies',
+      populate: {
+        path: 'author',
+        model: 'User'
+      }
     });
     
     if(!document) {
