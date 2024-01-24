@@ -10,9 +10,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import Spinner from '../../Spinner/Spinner';
+import { addNewPost, selectCurrentPosts } from '@/store/currentPostsSlice';
 
 const CreatePostForm = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
+  const currentPosts = useSelector(selectCurrentPosts);
+  console.log(currentPosts);
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm({ resolver: zodResolver(createPostFormSchema) });
 
@@ -32,6 +36,7 @@ const CreatePostForm = () => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        dispatch(addNewPost({...result.data, author: currentUser}));
         reset();
         notifySuccess(result.message);
       };
