@@ -1,10 +1,6 @@
-'use client'
-
 import React from 'react';
-import Link from 'next/link';
-import PostCard from '@/app/components/PostCard/PostCard';
-import CreateReplyForm from '@/app/components/Forms/CreateReply/CreateReplyForm';
 import BackButton from '@/app/components/Buttons/Back/BackButton';
+import MainPostDetail from '@/app/components/MainPostDetail/MainPostDetail';
 
 const PostDetailPage = () => {
   return (
@@ -13,15 +9,7 @@ const PostDetailPage = () => {
         <BackButton/>
       </div>
       <div>
-        <PostCard/>
-      </div>
-      <div className='px-4 pb-4'>
-        <CreateReplyForm/>
-      </div>
-      <div>
-        <PostCard/>
-        <PostCard/>
-        <PostCard/>
+        <MainPostDetail/>
       </div>
     </div>
   )

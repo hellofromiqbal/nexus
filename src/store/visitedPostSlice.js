@@ -12,9 +12,7 @@ const visitedPostSlice = createSlice({
   },
   reducers: {
     setVisitedPost: (state, action) => {
-      console.log(state.visitedPostInfo);
       state.visitedPostInfo = action.payload;
-      console.log(state.visitedPostInfo);
     }
   }
 });
@@ -22,5 +20,5 @@ const visitedPostSlice = createSlice({
 export const {
   setVisitedPost
 } = visitedPostSlice.actions;
-export const selectVisitedUser = (state) => state.visitedPost.visitedPostInfo;
+export const selectVisitedPost = (state) => state.visitedPost.visitedPostInfo;
 export default visitedPostSlice.reducer;
