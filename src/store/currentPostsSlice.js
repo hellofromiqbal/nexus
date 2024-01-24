@@ -8,15 +8,12 @@ const currentPostsSlice = createSlice({
   reducers: {
     setCurrentPosts: (state, action) => {
       state.posts = action.payload;
-      console.log(state.posts);
     },
     addNewPost: (state, action) => {
       state.posts.unshift(action.payload);
-      console.log(state.posts);
     },
     deletePost: (state, action) => {
       state.posts = state.posts.filter((post) => post._id !== action.payload);
-      console.log(state.posts);
     },
     likePost: (state, action) => {
       state.posts.map((post) => {
