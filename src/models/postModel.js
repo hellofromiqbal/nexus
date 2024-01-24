@@ -11,7 +11,7 @@ const postSchema = new Schema({
     required: true
   },
   likes: [{
-    user: {
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
@@ -21,7 +21,7 @@ const postSchema = new Schema({
     }
   }],
   replies: [{
-    user: {
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true
