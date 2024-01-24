@@ -12,7 +12,7 @@ import { timePosted } from '@/helpers/moment';
 const PostCard = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
   return (
-    <div className='p-4 flex gap-4'>
+    <div className='p-4 flex gap-4 border-t border-gray-700'>
       <div>
         <div className='w-[50px] h-[50px] bg-black rounded-full'></div>
       </div>
