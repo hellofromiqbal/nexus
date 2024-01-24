@@ -13,10 +13,10 @@ export const GET = async (request, response) => {
         method: 'User'
       })
     }).populate({
-      path: 'likes',
+      path: 'likedPosts',
       populate: ({
-        path: 'author',
-        method: 'User'
+        path: 'post',
+        method: 'Post'
       })
     }).populate({
       path: 'followers',
