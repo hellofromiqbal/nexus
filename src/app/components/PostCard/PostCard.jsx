@@ -29,7 +29,7 @@ const PostCard = ({ details }) => {
         </div>
         <div className='flex justify-end gap-8'>
           <LikePostButton currentUserId={currentUser?._id} details={details}/>
-          <Link href={"/dashboard/posts/1"} className='flex justify-end gap-2'>
+          <Link href={`/dashboard/posts/${details?._id}`} className='flex justify-end gap-2'>
             <FaRegComment className='text-white w-[18px] h-[18px]'/>
             <small className='text-white'>{details?.replies?.length}</small>
           </Link>
