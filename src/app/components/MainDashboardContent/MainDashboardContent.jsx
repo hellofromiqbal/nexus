@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react';
-
 import PostList from '../PostList/PostList';
 
 import { useSelector } from 'react-redux';
