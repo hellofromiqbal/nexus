@@ -13,7 +13,7 @@ const currentPostsSlice = createSlice({
       state.posts.unshift(action.payload);
     },
     deletePost: (state, action) => {
-      state.posts.filter((post) => post._id === action.payload);
+      state.posts = state.posts.filter((post) => post._id !== action.payload);
     }
   }
 });

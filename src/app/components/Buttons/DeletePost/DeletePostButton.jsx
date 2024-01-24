@@ -1,13 +1,16 @@
 'use client'
 
-import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { FaRegTrashCan } from "react-icons/fa6";
 
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '@/store/currentUserSlice';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '@/store/currentPostsSlice';
+
+import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 
 const DeletePostButton = ({ id, currentUserId }) => {
+  const dispatch = useDispatch();
   const handleDeletePost = async () => {
     try {
       const res = await fetch(`/api/posts/${id}`, {
@@ -21,6 +24,7 @@ const DeletePostButton = ({ id, currentUserId }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        dispatch(deletePost(id));
         notifySuccess(result.message);
       };
     } catch (error) {
