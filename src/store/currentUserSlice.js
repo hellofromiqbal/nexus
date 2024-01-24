@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
@@ -26,14 +26,19 @@ const currentUserSlice = createSlice({
       state.currentUserInfo = action.payload;
     },
     addNewFollowing: (state, action) => {
-      state.currentUserInfo.following.unshift(action.payload);
+      state.currentUserInfo.following.unshift({ ...action.payload, createdAt: new Date().toISOString(), _id: nanoid(24) });
+    },
+    deleteFollowing: (state, action) => {
+      const updatedFollowing = state.currentUserInfo.following.filter((user) => user.user._id !== action.payload);
+      state.currentUserInfo.following = updatedFollowing;
     }
   }
 });
 
 export const {
   setCurrentUser,
-  addNewFollowing
+  addNewFollowing,
+  deleteFollowing
 } = currentUserSlice.actions;
 export const selectCurrentUser = (state) => state.currentUser.currentUserInfo;
 export default currentUserSlice.reducer;

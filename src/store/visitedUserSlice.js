@@ -28,12 +28,17 @@ const visitedUserSlice = createSlice({
     addNewFollower: (state, action) => {
       state.visitedUserInfo.followers.unshift({ ...action.payload, createdAt: new Date().toISOString(), _id: nanoid(24) });
     },
+    deleteFollower: (state, action) => {
+      const updatedFollowers = state.visitedUserInfo.followers.filter((user) => user.user._id !== action.payload);
+      state.visitedUserInfo.followers = updatedFollowers;
+    }
   }
 });
 
 export const {
   setVisitedUser,
-  addNewFollower
+  addNewFollower,
+  deleteFollower
 } = visitedUserSlice.actions;
 export const selectVisitedUser = (state) => state.visitedUser.visitedUserInfo;
 export default visitedUserSlice.reducer;

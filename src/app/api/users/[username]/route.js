@@ -23,7 +23,13 @@ export const GET = async (request, { params }) => {
         path: 'user',
         method: 'User'
       })
-    });
+    }).populate({
+      path: 'following',
+      populate: ({
+        path: 'user',
+        method: 'User'
+      })
+    });;
     if(!document) {
       return NextResponse.json({
         success: false,

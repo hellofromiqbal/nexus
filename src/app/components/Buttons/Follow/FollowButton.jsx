@@ -5,8 +5,8 @@ import React from 'react';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 
 import { useDispatch } from 'react-redux';
-import { addNewFollower } from '@/store/visitedUserSlice';
-import { addNewFollowing } from '@/store/currentUserSlice';
+import { addNewFollower, deleteFollower } from '@/store/visitedUserSlice';
+import { addNewFollowing, deleteFollowing } from '@/store/currentUserSlice';
 
 const FollowButton = ({ currentUserId, details }) => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const FollowButton = ({ currentUserId, details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(addNewFollowing(details?._id));
+        dispatch(addNewFollowing({ user: details }));
         dispatch(addNewFollower({ user: result.data }));
         notifySuccess(result.message);
       };
@@ -46,6 +46,8 @@ const FollowButton = ({ currentUserId, details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        dispatch(deleteFollowing(details?._id));
+        dispatch(deleteFollower(currentUserId));
         notifySuccess(result.message);
       };
     } catch (error) {
