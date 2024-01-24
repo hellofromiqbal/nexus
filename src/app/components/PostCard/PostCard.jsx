@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import DeletePostButton from '../Buttons/DeletePost/DeletePostButton';
 import LikePostButton from '../Buttons/LikePost/LikePostButton';
+import { timePosted } from '@/helpers/moment';
 
 const PostCard = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -23,10 +24,12 @@ const PostCard = ({ details }) => {
         <div className='w-[50px] h-[50px] bg-black rounded-full'></div>
       </div>
       <div className='flex flex-col w-full'>
-        <div className='flex items-center gap-2'>
-          <Link href={`/dashboard/profile/${details?.author?.username}`} className='text-white'>{details?.author?.fullname}</Link>
+        <div className='flex items-center gap-1'>
+          <Link href={`/dashboard/profile/${details?.author?.username}`} className='text-white font-medium'>{details?.author?.fullname}</Link>
+          <span className='text-white text-opacity-70'>·</span>
           <Link href={`/dashboard/profile/${details?.author?.username}`} className='text-sm text-white text-opacity-70'>{details?.author?.username}</Link>
-          <p className='text-sm text-white text-opacity-70'>12/28/2023 - 3:00 PM</p>
+          <span className='text-white text-opacity-70'>·</span>
+          <p className='text-sm text-white text-opacity-70'>{timePosted(details?.createdAt)}</p>
         </div>
         <div>
           <p className='text-white text-opacity-70'>{details?.textContent}</p>

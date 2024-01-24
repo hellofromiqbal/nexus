@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { joinedDate } from '@/helpers/moment';
+import { timeJoined } from '@/helpers/moment';
 import ProfileCTA from '../ProfileCTA/ProfileCTA';
 
 const ProfileDetails = ({ details }) => {
@@ -21,7 +21,7 @@ const ProfileDetails = ({ details }) => {
           <p className='text-white'>{details?.bio}</p>
           <div className='flex gap-4'>
             <p className='text-sm text-white text-opacity-70'>{details?.location}</p>
-            <p className='text-sm text-white text-opacity-70'>Joined {joinedDate(details?.createdAt)}</p>
+            <p className='text-sm text-white text-opacity-70'>Joined {timeJoined(details?.createdAt)}</p>
           </div>
           <div className='flex gap-4'>
             <Link href={"/dashboard"} className='flex justify-end gap-1'>
