@@ -8,11 +8,13 @@ import { createReplyFormSchema } from '@/helpers/zodSchema';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { useParams } from 'next/navigation';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import Spinner from '../../Spinner/Spinner';
+import { addNewPostOnVisitedPost } from '@/store/visitedPostSlice';
 
 const CreateReplyForm = () => {
+  const dispatch = useDispatch();
   const params = useParams();
   const id = params.id;
   const currentUser = useSelector(selectCurrentUser);
@@ -35,6 +37,8 @@ const CreateReplyForm = () => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        console.log({ ...result.data, author: currentUser });
+        dispatch(addNewPostOnVisitedPost({ ...result.data, author: currentUser }));
         reset();
         notifySuccess(result.message);
       };
