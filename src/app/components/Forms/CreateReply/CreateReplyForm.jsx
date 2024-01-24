@@ -10,6 +10,7 @@ import { useParams } from 'next/navigation';
 
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
+import Spinner from '../../Spinner/Spinner';
 
 const CreateReplyForm = () => {
   const params = useParams();
@@ -53,7 +54,12 @@ const CreateReplyForm = () => {
         className='px-4 py-2 h-24 rounded-md resize-none bg-transparent border text-white'
         {...register('textContent')}
       ></textarea>
-      <button className="py-2 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-full">Reply</button>
+      <button
+        className={`py-2 text-black font-semibold rounded-full ${isLoading ? 'bg-gray-500 hover:bg-gray-500' : 'bg-green-500 hover:bg-green-600'} flex justify-center items-center`}
+        disabled={isLoading}
+      >
+        {isLoading ? <Spinner/> : 'Reply'}
+      </button>
     </form>
   )
 };
