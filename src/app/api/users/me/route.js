@@ -10,25 +10,25 @@ export const GET = async (request, response) => {
       path: 'posts',
       populate: ({
         path: 'author',
-        method: 'User'
+        model: 'User'
       })
     }).populate({
       path: 'likedPosts',
       populate: ({
         path: 'post',
-        method: 'Post'
+        model: 'Post'
       })
     }).populate({
       path: 'followers',
       populate: ({
         path: 'user',
-        method: 'User'
+        model: 'User'
       })
     }).populate({
       path: 'following',
       populate: ({
         path: 'user',
-        method: 'User'
+        model: 'User'
       })
     });
 

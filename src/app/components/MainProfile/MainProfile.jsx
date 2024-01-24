@@ -17,7 +17,7 @@ const MainProfile = () => {
   const username = decodeURIComponent(params.username);
   const [showPosts, setShowPosts] = useState('posts');
   const currentVisitedUser = useSelector(selectVisitedUser);
-  
+
   useEffect(() => {
     fetch(`/api/users/${username}`)
       .then((res) => res.json())
@@ -40,7 +40,7 @@ const MainProfile = () => {
         {showPosts === 'posts' ?
           <PostList list={currentVisitedUser?.posts}/>
           :
-          <PostList list={currentVisitedUser?.likedPosts}/>
+          <PostList list={currentVisitedUser?.likedPosts?.map((item) => item.post)}/>
         }
       </div>
     </>
