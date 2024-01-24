@@ -29,7 +29,10 @@ const Navbar = () => {
   useEffect(() => {
     fetch('/api/posts/')
       .then((res) => res.json())
-      .then((data) => dispatch(setCurrentPosts(data.data)))
+      .then((data) => {
+        console.log(data.data);
+        dispatch(setCurrentPosts(data.data))
+      })
       .catch((err) => console.log(err.message));
   }, []);
 

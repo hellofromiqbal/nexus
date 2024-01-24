@@ -11,13 +11,8 @@ export const GET = async (request, response) => {
         path: 'author',
         model: 'User'
       })
-    }).populate({
-      path: 'replies',
-      populate: ({
-        path: 'author',
-        model: 'User'
-      })
     });
+
     return NextResponse.json({
       success: true,
       data: documents
