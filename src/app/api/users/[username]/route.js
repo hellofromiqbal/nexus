@@ -5,35 +5,48 @@ import { NextResponse } from 'next/server';
 export const GET = async (request, { params }) => {
   try {
     await connectMongoDB();
-    const document = await User.findOne({ username: params.username }).populate({
+    const document = await User.findOne({ username: params.username })
+    .populate({
       path: 'posts',
-      populate: ({
+      populate: {
         path: 'author',
         model: 'User'
-      })
-    }).populate({
+      }
+    })
+    .populate({
       path: 'likedPosts',
-      populate: ({
+      populate: {
         path: 'post',
-        model: 'Post',
-        populate: ({
-          path: 'author',
-          model: 'User'
-        })
-      })
-    }).populate({
+        populate: [
+          {
+            path: 'author',
+            model: 'User'
+          },
+          {
+            path: 'likes',
+            populate: {
+              path: 'author',
+              model: 'User'
+            }
+          }
+        ]
+      }
+    })
+    .populate({
       path: 'followers',
-      populate: ({
+      populate: {
         path: 'user',
         model: 'User'
-      })
-    }).populate({
+      }
+    })
+    .populate({
       path: 'following',
-      populate: ({
+      populate: {
         path: 'user',
         model: 'User'
-      })
-    });;
+      }
+    });
+    
     if(!document) {
       return NextResponse.json({
         success: false,
