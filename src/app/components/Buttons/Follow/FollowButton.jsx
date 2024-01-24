@@ -1,9 +1,15 @@
 'use client'
 
-import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import React from 'react';
 
+import { notifyFailed, notifySuccess } from '@/helpers/toaster';
+
+import { useDispatch } from 'react-redux';
+import { addNewFollower } from '@/store/visitedUserSlice';
+import { addNewFollowing } from '@/store/currentUserSlice';
+
 const FollowButton = ({ currentUserId, details }) => {
+  const dispatch = useDispatch();
   const isVisitedUserAlreadyFollowed = details?.followers?.find((user) => user?.user?._id === currentUserId);
   const handleFollowButton = async () => {
     try {
@@ -18,6 +24,8 @@ const FollowButton = ({ currentUserId, details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        dispatch(addNewFollowing(details?._id));
+        dispatch(addNewFollower(currentUserId));
         notifySuccess(result.message);
       };
     } catch (error) {

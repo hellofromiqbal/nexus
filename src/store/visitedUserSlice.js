@@ -25,11 +25,15 @@ const visitedUserSlice = createSlice({
     setVisitedUser: (state, action) => {
       state.visitedUserInfo = action.payload;
     },
+    addNewFollower: (state, action) => {
+      state.visitedUserInfo.followers.unshift(action.payload);
+    },
   }
 });
 
 export const {
-  setVisitedUser
+  setVisitedUser,
+  addNewFollower
 } = visitedUserSlice.actions;
 export const selectVisitedUser = (state) => state.visitedUser.visitedUserInfo;
 export default visitedUserSlice.reducer;
