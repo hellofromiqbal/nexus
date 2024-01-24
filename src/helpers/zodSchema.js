@@ -25,3 +25,7 @@ export const loginFormSchema = z.object({
 export const createPostFormSchema = z.object({
   textContent: z.string().min(1, { message: "Text content must be at least 1 or more characters long. "}).max(1000, { message: "Text content must be 1000 or fewer characters long." }),
 });
+
+export const createReplyFormSchema = z.object({
+  textContent: z.string().min(1, { message: "Text content must be at least 1 or more characters long. "}).max(1000, { message: "Text content must be 1000 or fewer characters long." }),
+});
