@@ -57,7 +57,7 @@ const FollowButton = ({ currentUserId, details }) => {
 
   return (
     <button
-      className="px-4 py-1 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-full w-max"
+      className={`px-4 py-1 font-medium rounded-full w-max ${isVisitedUserAlreadyFollowed ? 'bg-red-500 hover:bg-red-500 text-black' : 'bg-green-500 hover:bg-green-600 text-black'}`}
       onClick={isVisitedUserAlreadyFollowed ? handleUnfollowButton : handleFollowButton}
     >{isVisitedUserAlreadyFollowed ? 'Unfollow' : 'Follow'}</button>
   )
