@@ -27,7 +27,15 @@ const userSchema = new Schema({
     type: String,
     default: 'Hello there! I am using Nexus.'
   },
+  location: {
+    type: String,
+    default: 'Somewhere'
+  },
   profileImage: {
+    type: String,
+    default: null
+  },
+  bgProfileImage: {
     type: String,
     default: null
   },
@@ -37,12 +45,16 @@ const userSchema = new Schema({
       ref: 'Post'
     }
   ],
-  likes: [
-    {
+  likedPosts: [{
+    post: {
       type: Schema.Types.ObjectId,
       ref: 'Post'
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now()
     }
-  ],
+  }],
   followers: [{
     user: {
       type: Schema.Types.ObjectId,
