@@ -12,7 +12,7 @@ export const GET = async (request, { params }) => {
         method: 'User'
       })
     }).populate({
-      path: 'likes',
+      path: 'likedPosts',
       populate: ({
         path: 'author',
         method: 'User'
