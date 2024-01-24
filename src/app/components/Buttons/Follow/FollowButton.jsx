@@ -25,7 +25,7 @@ const FollowButton = ({ currentUserId, details }) => {
       } else {
         const result = await res.json();
         dispatch(addNewFollowing(details?._id));
-        dispatch(addNewFollower(currentUserId));
+        dispatch(addNewFollower({ user: result.data }));
         notifySuccess(result.message);
       };
     } catch (error) {

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const visitedUserSlice = createSlice({
   name: 'visitedUser',
@@ -26,7 +26,7 @@ const visitedUserSlice = createSlice({
       state.visitedUserInfo = action.payload;
     },
     addNewFollower: (state, action) => {
-      state.visitedUserInfo.followers.unshift(action.payload);
+      state.visitedUserInfo.followers.unshift({ ...action.payload, createdAt: new Date().toISOString(), _id: nanoid(24) });
     },
   }
 });

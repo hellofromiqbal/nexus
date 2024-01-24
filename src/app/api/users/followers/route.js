@@ -34,6 +34,7 @@ export const POST = async (request, response) => {
     return NextResponse.json({
       success: true,
       message: 'Followed.',
+      data: currentUser
     }, { status: 200 })
   } catch (error) {
     return NextResponse.json({
