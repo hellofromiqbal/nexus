@@ -20,7 +20,7 @@ const ProfileDetails = ({ details }) => {
           </div>
           <p className='text-white'>{details?.bio}</p>
           <div className='flex gap-4'>
-            <p className='text-sm text-white text-opacity-70'>Somewhere</p>
+            <p className='text-sm text-white text-opacity-70'>{details?.location}</p>
             <p className='text-sm text-white text-opacity-70'>Joined {joinedDate(details?.createdAt)}</p>
           </div>
           <div className='flex gap-4'>

@@ -40,7 +40,7 @@ const MainProfile = () => {
         {showPosts === 'posts' ?
           <PostList list={currentVisitedUser?.posts}/>
           :
-          <PostList list={currentVisitedUser?.likes}/>
+          <PostList list={currentVisitedUser?.likedPosts}/>
         }
       </div>
     </>
