@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const postSchema = new Schema({
+const replySchema = new Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -26,6 +26,6 @@ const postSchema = new Schema({
   }]
 }, { timestamps: true });
 
-const Post = mongoose.models.Post || mongoose.model('Post', postSchema);
+const Reply = mongoose.models.Reply || mongoose.model('Reply', replySchema);
 
-export default Post;
+export default Reply;
