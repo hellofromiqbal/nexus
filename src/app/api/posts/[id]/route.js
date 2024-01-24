@@ -6,19 +6,16 @@ import { NextResponse } from 'next/server';
 export const GET = async (request, { params }) => {
   try {
     await connectMongoDB();
-    const document = await Post.findById(params.id).populate('author').populate({
+    const document = await Post.findById(params.id)
+    .populate('author')
+    .populate({
       path: 'likes',
-      populate: ({
+      populate: {
         path: 'author',
         method: 'User'
-      })
-    }).populate({
-      path: 'replies',
-      populate: ({
-        path: 'author',
-        method: 'User'
-      })
+      }
     });
+    
     if(!document) {
       return NextResponse.json({
         success: false,
