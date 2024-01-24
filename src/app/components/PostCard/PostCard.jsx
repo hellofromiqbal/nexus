@@ -2,14 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import {
-  FaRegHeart,
-  FaHeart,
-  FaRegComment,
-  FaComment,
-  FaRegTrashCan,
-  FaTrash
-} from "react-icons/fa6";
+import { FaRegComment } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import DeletePostButton from '../Buttons/DeletePost/DeletePostButton';
