@@ -21,14 +21,14 @@ const currentPostsSlice = createSlice({
     likePost: (state, action) => {
       state.posts.map((post) => {
         if(post._id === action.payload.id) {
-          post.likes.unshift(action.payload.currentUserId);
+          post.likes.unshift({ _id: nanoid(), author: action.payload.currentUser, createdAt: new Date().toISOString() });
         }
       });
     },
     unlikePost: (state, action) => {
       state.posts.map((post) => {
         if(post._id === action.payload.id) {
-          post.likes = post.likes.filter((userId) => userId !== action.payload.currentUserId);
+          post.likes = post.likes.filter((like) => like.author._id !== action.payload.currentUserId);
         };
       });
     }

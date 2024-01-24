@@ -3,14 +3,17 @@
 import React from 'react';
 import { FaRegHeart, FaHeart } from "react-icons/fa6";
 
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { likePost, unlikePost } from '@/store/currentPostsSlice';
+import { selectCurrentUser } from '@/store/currentUserSlice';
 
 const LikePostButton = ({ currentUserId, details }) => {
+  const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
-  const isPostAlreadyLiked = details?.likes?.find((userId) => userId === currentUserId);
+  console.log(details);
+  const isPostAlreadyLiked = details?.likes?.find((like) => like?.author?._id === currentUser?._id);
 
   const handleLikeButton = async () => {
     try {
@@ -18,7 +21,7 @@ const LikePostButton = ({ currentUserId, details }) => {
         cache: 'no-store',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ currentUserId, postId: details?._id })
+        body: JSON.stringify({ currentUserId: currentUser?._id, postId: details?._id })
       });
 
       if(!res.ok) {
@@ -26,7 +29,7 @@ const LikePostButton = ({ currentUserId, details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(likePost({ id: details?._id, currentUserId }));
+        dispatch(likePost({ id: details?._id, currentUser }));
         notifySuccess(result.message);
       };
     } catch (error) {

@@ -25,10 +25,10 @@ export const POST = async (request, response) => {
       }, { status: 404 });
     };
 
-    document.likes.push(currentUserId);
+    document.likes.push({ author: currentUserId });
     document.save();
 
-    currentUser.likes.push(postId);
+    currentUser.likedPosts.push({ post: postId });
     currentUser.save();
 
     return NextResponse.json({
@@ -65,10 +65,10 @@ export const PUT = async (request, response) => {
       }, { status: 404 });
     };
 
-    document.likes.pull(currentUserId);
+    document.likes.pull({ author: currentUserId });
     document.save();
 
-    currentUser.likes.pull(postId);
+    currentUser.likedPosts.pull({ post: postId });
     currentUser.save();
 
     return NextResponse.json({
