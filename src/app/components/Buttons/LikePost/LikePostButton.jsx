@@ -1,11 +1,17 @@
-import { notifyFailed, notifySuccess } from '@/helpers/toaster';
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+'use client'
+
 import React from 'react';
 import { FaRegHeart, FaHeart } from "react-icons/fa6";
 
+import { useDispatch } from 'react-redux';
+
+import { notifyFailed, notifySuccess } from '@/helpers/toaster';
+import { likePost } from '@/store/currentPostsSlice';
+
 const LikePostButton = ({ currentUserId, details }) => {
-  const params = useParams();
+  const dispatch = useDispatch();
+  const isPostAlreadyLiked = details?.likes?.find((userId) => userId === currentUserId);
+
   const handleLikeButton = async () => {
     try {
       const res = await fetch(`/api/posts/likes/`, {
@@ -20,12 +26,14 @@ const LikePostButton = ({ currentUserId, details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        dispatch(likePost({ id: details?._id, currentUserId }));
         notifySuccess(result.message);
       };
     } catch (error) {
       notifyFailed(error.message);
     };
   };
+
   const handleUnlikeButton = async () => {
     try {
       const res = await fetch(`/api/posts/likes/`, {
@@ -46,8 +54,6 @@ const LikePostButton = ({ currentUserId, details }) => {
       notifyFailed(error.message);
     };
   };
-  console.log(details);
-  const isPostAlreadyLiked = details?.likes?.find((userId) => userId === currentUserId);
 
   return (
     <button
