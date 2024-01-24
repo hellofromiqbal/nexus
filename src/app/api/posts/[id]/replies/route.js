@@ -1,5 +1,6 @@
 import connectMongoDB from '@/libs/mongodb';
 import Post from '@/models/postModel';
+import Reply from '@/models/replyModel';
 import User from '@/models/userModel';
 import { NextResponse } from 'next/server';
 
@@ -22,13 +23,19 @@ export const POST = async (request, { params }) => {
         message: 'User not found.'
       }, { status: 404 });
     };
+
+    const newReply = await Reply.create({
+      author: authorId,
+      textContent
+    });
     
-    document.replies.unshift({ author: authorId, textContent });
+    document.replies.unshift(newReply._id);
     document.save();
     
     return NextResponse.json({
       success: true,
-      message: 'Post replied.'
+      message: 'Post replied.',
+      data: newReply
     }, { status: 200 });
   } catch (error) {
     return NextResponse.json({
