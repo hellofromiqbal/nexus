@@ -6,7 +6,7 @@ import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { useDispatch } from 'react-redux';
 
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
-import { likePost } from '@/store/currentPostsSlice';
+import { likePost, unlikePost } from '@/store/currentPostsSlice';
 
 const LikePostButton = ({ currentUserId, details }) => {
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ const LikePostButton = ({ currentUserId, details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        dispatch(unlikePost({ id: details?._id, currentUserId }));
         notifySuccess(result.message);
       };
     } catch (error) {

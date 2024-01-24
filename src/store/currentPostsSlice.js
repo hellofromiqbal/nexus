@@ -21,6 +21,13 @@ const currentPostsSlice = createSlice({
           post.likes.unshift(action.payload.currentUserId);
         }
       });
+    },
+    unlikePost: (state, action) => {
+      state.posts.map((post) => {
+        if(post._id === action.payload.id) {
+          post.likes = post.likes.filter((userId) => userId !== action.payload.currentUserId);
+        };
+      });
     }
   }
 });
@@ -29,7 +36,8 @@ export const {
   setCurrentPosts,
   addNewPost,
   deletePost,
-  likePost
+  likePost,
+  unlikePost
 } = currentPostsSlice.actions;
 export const selectCurrentPosts = (state) => state.currentPosts.posts;
 export default currentPostsSlice.reducer;
