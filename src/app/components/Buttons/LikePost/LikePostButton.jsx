@@ -8,8 +8,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { likePost, unlikePost } from '@/store/currentPostsSlice';
 import { selectCurrentUser } from '@/store/currentUserSlice';
+import { addLikeOnVisitedPost, deleteLikeOnVisitedPost } from '@/store/visitedPostSlice';
 
-const LikePostButton = ({ currentUserId, details }) => {
+const LikePostButton = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   console.log(details);
@@ -30,6 +31,7 @@ const LikePostButton = ({ currentUserId, details }) => {
       } else {
         const result = await res.json();
         dispatch(likePost({ id: details?._id, currentUser }));
+        dispatch(addLikeOnVisitedPost(currentUser));
         notifySuccess(result.message);
       };
     } catch (error) {
@@ -43,7 +45,7 @@ const LikePostButton = ({ currentUserId, details }) => {
         cache: 'no-store',
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ currentUserId, postId: details?._id })
+        body: JSON.stringify({ currentUserId: currentUser?._id, postId: details?._id })
       });
 
       if(!res.ok) {
@@ -51,7 +53,8 @@ const LikePostButton = ({ currentUserId, details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(unlikePost({ id: details?._id, currentUserId }));
+        dispatch(unlikePost({ id: details?._id, currentUserId: currentUser?._id }));
+        dispatch(deleteLikeOnVisitedPost({ currentUserId: currentUser?._id }))
         notifySuccess(result.message);
       };
     } catch (error) {

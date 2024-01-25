@@ -20,7 +20,10 @@ const MainPostDetail = () => {
   useEffect(() => {
     fetch(`/api/posts/${id}`, { cache: 'no-store' })
       .then((res) => res.json())
-      .then((data) => dispatch(setVisitedPost(data.data)))
+      .then((data) => {
+        console.log(data.data);
+        dispatch(setVisitedPost(data.data));
+      })
       .catch((err) => {
         console.log(err.message);
       })
