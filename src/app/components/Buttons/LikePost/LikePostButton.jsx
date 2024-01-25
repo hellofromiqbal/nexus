@@ -9,6 +9,7 @@ import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { likePost, unlikePost } from '@/store/currentPostsSlice';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import { addLikeOnVisitedPost, deleteLikeOnVisitedPost } from '@/store/visitedPostSlice';
+import { addLikeToVisitedUserPost, deleteLikeFromVisitedUserPost } from '@/store/visitedUserSlice';
 
 const LikePostButton = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -31,6 +32,7 @@ const LikePostButton = ({ details }) => {
         const result = await res.json();
         dispatch(likePost({ id: details?._id, currentUser }));
         dispatch(addLikeOnVisitedPost(currentUser));
+        dispatch(addLikeToVisitedUserPost({ id: details?._id, currentUser }));
         notifySuccess(result.message);
       };
     } catch (error) {
@@ -54,6 +56,7 @@ const LikePostButton = ({ details }) => {
         const result = await res.json();
         dispatch(unlikePost({ id: details?._id, currentUserId: currentUser?._id }));
         dispatch(deleteLikeOnVisitedPost({ currentUserId: currentUser?._id }))
+        dispatch(deleteLikeFromVisitedUserPost({ id: details?._id, currentUserId: currentUser?._id }))
         notifySuccess(result.message);
       };
     } catch (error) {

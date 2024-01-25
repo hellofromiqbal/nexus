@@ -37,6 +37,20 @@ const visitedUserSlice = createSlice({
     deleteVisitedUserPost: (state, action) => {
       const updatedPosts = state.visitedUserInfo.posts.filter((post) => post._id !== action.payload);
       state.visitedUserInfo.posts = updatedPosts;
+    },
+    addLikeToVisitedUserPost: (state, action) => {
+      state.visitedUserInfo.posts.map((post) => {
+        if(post._id === action.payload.id) {
+          post.likes.unshift({ _id: nanoid(), author: action.payload.currentUser, createdAt: new Date().toISOString() });
+        }
+      })
+    },
+    deleteLikeFromVisitedUserPost: (state, action) => {
+      state.visitedUserInfo.posts.map((post) => {
+        if(post._id === action.payload.id) {
+          post.likes = post.likes.filter((like) => like.author._id !== action.payload.currentUserId);
+        };
+      });
     }
   }
 });
@@ -45,7 +59,9 @@ export const {
   setVisitedUser,
   addNewFollower,
   deleteFollower,
-  deleteVisitedUserPost
+  deleteVisitedUserPost,
+  addLikeToVisitedUserPost,
+  deleteLikeFromVisitedUserPost
 } = visitedUserSlice.actions;
 export const selectVisitedUser = (state) => state.visitedUser.visitedUserInfo;
 export default visitedUserSlice.reducer;
