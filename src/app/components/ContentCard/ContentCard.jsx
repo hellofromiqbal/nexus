@@ -9,7 +9,7 @@ import DeletePostButton from '../Buttons/DeletePost/DeletePostButton';
 import LikePostButton from '../Buttons/LikePost/LikePostButton';
 import { timePosted } from '@/helpers/moment';
 
-const ContentCard = ({ details }) => {
+const ContentCard = ({ details, type }) => {
   const currentUser = useSelector(selectCurrentUser);
   return (
     <div className='p-4 flex gap-4 border-t border-gray-700'>
@@ -28,16 +28,27 @@ const ContentCard = ({ details }) => {
           <p className='text-white text-opacity-70'>{details?.textContent}</p>
         </div>
         <div className='flex justify-end gap-8'>
-          <LikePostButton details={details}/>
-          <Link href={`/dashboard/posts/${details?._id}`} className='flex justify-end gap-2'>
-            <FaRegComment className='text-white w-[18px] h-[18px]'/>
-            <small className='text-white'>{details?.replies?.length}</small>
-          </Link>
-          {details?.author?.username === currentUser?.username ?
-            <DeletePostButton id={details?._id} currentUserId={currentUser?._id}/>
+          {type === 'post' ?
+            <>
+              <LikePostButton details={details}/>
+              <Link href={`/dashboard/posts/${details?._id}`} className='flex justify-end gap-2'>
+                <FaRegComment className='text-white w-[18px] h-[18px]'/>
+                <small className='text-white'>{details?.replies?.length}</small>
+              </Link>
+              {details?.author?.username === currentUser?.username ?
+                <DeletePostButton id={details?._id} currentUserId={currentUser?._id}/>
+                :
+                ''
+              }
+            </>
             :
-            ''
+            <>
+              <small className='text-white'>Like Reply</small>
+              <small className='text-white'>Comment Reply</small>
+              <small className='text-white'>Delete Reply</small>
+            </>
           }
+          
         </div>
       </div>
     </div>

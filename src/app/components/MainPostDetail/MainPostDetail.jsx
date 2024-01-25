@@ -29,13 +29,13 @@ const MainPostDetail = () => {
   return (
     <>
       <div>
-        <ContentCard details={visitedPost}/>
+        <ContentCard details={visitedPost} type='post'/>
       </div>
       <div className='px-4 pb-4'>
         <CreateReplyForm/>
       </div>
       <div>
-        <ContentList list={visitedPost?.replies}/>
+        <ContentList list={visitedPost?.replies} type='reply'/>
       </div>
     </>
   )
