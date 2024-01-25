@@ -1,7 +1,7 @@
 import React from 'react';
 import PostCard from '../PostCard/PostCard';
 
-const PostList = ({ list }) => {
+const ContentList = ({ list }) => {
   return (
     <>
       {list?.map((item) => (
@@ -11,4 +11,4 @@ const PostList = ({ list }) => {
   )
 };
 
-export default PostList;
+export default ContentList;

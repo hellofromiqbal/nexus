@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 
 import ProfileDetails from '../ProfileDetails/ProfileDetails';
 import ProfileButtons from '../ProfileButtons/ProfileButtons';
-import PostList from '../PostList/PostList';
+import ContentList from '../ContentList/ContentList';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectVisitedUser, setVisitedUser } from '@/store/visitedUserSlice';
@@ -38,9 +38,9 @@ const MainProfile = () => {
       </div>
       <div>
         {showPosts === 'posts' ?
-          <PostList list={currentVisitedUser?.posts}/>
+          <ContentList list={currentVisitedUser?.posts}/>
           :
-          <PostList list={currentVisitedUser?.likedPosts?.map((item) => item.post)}/>
+          <ContentList list={currentVisitedUser?.likedPosts?.map((item) => item.post)}/>
         }
       </div>
     </>

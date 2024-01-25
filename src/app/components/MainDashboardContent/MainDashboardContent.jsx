@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import PostList from '../PostList/PostList';
+import ContentList from '../ContentList/ContentList';
 
 import { useSelector } from 'react-redux';
 import { selectCurrentPosts } from '@/store/currentPostsSlice';
@@ -11,7 +11,7 @@ const MainDashboardContent = () => {
 
   return (
     <>
-      <PostList list={currentPosts}/>
+      <ContentList list={currentPosts}/>
     </>
   )
 };

@@ -4,7 +4,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 
-import PostList from '../PostList/PostList';
+import ContentList from '../ContentList/ContentList';
 import PostCard from '../PostCard/PostCard';
 import CreateReplyForm from '../Forms/CreateReply/CreateReplyForm';
 
@@ -35,7 +35,7 @@ const MainPostDetail = () => {
         <CreateReplyForm/>
       </div>
       <div>
-        <PostList list={visitedPost?.replies}/>
+        <ContentList list={visitedPost?.replies}/>
       </div>
     </>
   )
