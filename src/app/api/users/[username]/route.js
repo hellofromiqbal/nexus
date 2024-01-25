@@ -8,10 +8,23 @@ export const GET = async (request, { params }) => {
     const document = await User.findOne({ username: params.username })
     .populate({
       path: 'posts',
-      populate: {
-        path: 'author',
-        model: 'User'
-      }
+      populate: [
+        {
+          path: 'author',
+          model: 'User'
+        },
+        {
+          path: 'likes',
+          populate: {
+            path: 'author',
+            model: 'User'
+          }
+        },
+        {
+          path: 'replies',
+          model: 'Reply'
+        }
+      ]
     })
     .populate({
       path: 'likedPosts',
