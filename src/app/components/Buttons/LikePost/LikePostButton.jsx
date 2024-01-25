@@ -13,7 +13,6 @@ import { addLikeOnVisitedPost, deleteLikeOnVisitedPost } from '@/store/visitedPo
 const LikePostButton = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
-  console.log(details);
   const isPostAlreadyLiked = details?.likes?.find((like) => like?.author?._id === currentUser?._id);
 
   const handleLikeButton = async () => {

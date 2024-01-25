@@ -28,7 +28,7 @@ const PostCard = ({ details }) => {
           <p className='text-white text-opacity-70'>{details?.textContent}</p>
         </div>
         <div className='flex justify-end gap-8'>
-          <LikePostButton currentUserId={currentUser?._id} details={details}/>
+          <LikePostButton details={details}/>
           <Link href={`/dashboard/posts/${details?._id}`} className='flex justify-end gap-2'>
             <FaRegComment className='text-white w-[18px] h-[18px]'/>
             <small className='text-white'>{details?.replies?.length}</small>
