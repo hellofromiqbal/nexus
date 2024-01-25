@@ -21,10 +21,7 @@ const MainProfile = () => {
   useEffect(() => {
     fetch(`/api/users/${username}`)
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data);
-        dispatch(setVisitedUser(data.data));
-      })
+      .then((data) => dispatch(setVisitedUser(data.data)))
       .catch((err) => console.log(err.message));
   }, []);
   
