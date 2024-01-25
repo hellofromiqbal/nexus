@@ -1,11 +1,11 @@
 import React from 'react';
-import PostCard from '../PostCard/PostCard';
+import ContentCard from '../ContentCard/ContentCard';
 
 const ContentList = ({ list }) => {
   return (
     <>
       {list?.map((item) => (
-        <PostCard key={item?._id} details={item}/>
+        <ContentCard key={item?._id} details={item}/>
       ))}
     </>
   )

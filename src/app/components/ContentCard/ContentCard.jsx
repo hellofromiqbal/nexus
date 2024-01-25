@@ -9,7 +9,7 @@ import DeletePostButton from '../Buttons/DeletePost/DeletePostButton';
 import LikePostButton from '../Buttons/LikePost/LikePostButton';
 import { timePosted } from '@/helpers/moment';
 
-const PostCard = ({ details }) => {
+const ContentCard = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
   return (
     <div className='p-4 flex gap-4 border-t border-gray-700'>
@@ -44,4 +44,4 @@ const PostCard = ({ details }) => {
   )
 };
 
-export default PostCard;
+export default ContentCard;

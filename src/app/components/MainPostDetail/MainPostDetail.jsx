@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 
 import ContentList from '../ContentList/ContentList';
-import PostCard from '../PostCard/PostCard';
+import ContentCard from '../ContentCard/ContentCard';
 import CreateReplyForm from '../Forms/CreateReply/CreateReplyForm';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,7 +29,7 @@ const MainPostDetail = () => {
   return (
     <>
       <div>
-        <PostCard details={visitedPost}/>
+        <ContentCard details={visitedPost}/>
       </div>
       <div className='px-4 pb-4'>
         <CreateReplyForm/>
