@@ -66,6 +66,9 @@ export const POST = async (request, { params }) => {
     currentUser.posts.pull(params.id);
     currentUser.save();
 
+    const postReplies = document.replies;
+    await Reply.deleteMany({ _id: { $in: postReplies } });
+
     await Post.findByIdAndDelete(params.id);
     return NextResponse.json({
       success: true,
