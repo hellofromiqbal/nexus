@@ -10,7 +10,7 @@ import { deletePost } from '@/store/currentPostsSlice';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { deleteVisitedUserPost } from '@/store/visitedUserSlice';
 
-const DeleteReply = ({ id, currentUserId }) => {
+const DeleteReplyButton = ({ id, currentUserId }) => {
   const dispatch = useDispatch();
   const handleDeletePost = async () => {
     try {
@@ -44,4 +44,4 @@ const DeleteReply = ({ id, currentUserId }) => {
   )
 };
 
-export default DeleteReply;
+export default DeleteReplyButton;

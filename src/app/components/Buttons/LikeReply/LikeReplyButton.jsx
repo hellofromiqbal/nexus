@@ -11,7 +11,7 @@ import { selectCurrentUser } from '@/store/currentUserSlice';
 import { addLikeOnVisitedPost, deleteLikeOnVisitedPost } from '@/store/visitedPostSlice';
 import { addLikeToVisitedUserPost, deleteLikeFromVisitedUserPost } from '@/store/visitedUserSlice';
 
-const LikeReply = ({ details }) => {
+const LikeReplyButton = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const isPostAlreadyLiked = details?.likes?.find((like) => like?.author?._id === currentUser?._id);
@@ -79,4 +79,4 @@ const LikeReply = ({ details }) => {
   )
 };
 
-export default LikeReply;
+export default LikeReplyButton;
