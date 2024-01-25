@@ -50,7 +50,11 @@ const ContentCard = ({ details, type }) => {
                 <FaRegComment className='text-white w-[18px] h-[18px]'/>
                 <small className='text-white'>{details?.replies?.length}</small>
               </Link>
-              <DeleteReplyButton/>
+              {details?.author?.username === currentUser?.username ?
+                <DeleteReplyButton id={details?._id} currentUserId={currentUser?._id}/>
+                :
+                ''
+              }
             </>
           }
           
