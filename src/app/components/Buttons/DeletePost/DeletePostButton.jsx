@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { deletePost } from '@/store/currentPostsSlice';
 
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
+import { deleteVisitedUserPost } from '@/store/visitedUserSlice';
 
 const DeletePostButton = ({ id, currentUserId }) => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const DeletePostButton = ({ id, currentUserId }) => {
       } else {
         const result = await res.json();
         dispatch(deletePost(id));
+        dispatch(deleteVisitedUserPost(id));
         notifySuccess(result.message);
       };
     } catch (error) {

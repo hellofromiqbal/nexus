@@ -33,6 +33,10 @@ const visitedUserSlice = createSlice({
     deleteFollower: (state, action) => {
       const updatedFollowers = state.visitedUserInfo.followers.filter((user) => user.user._id !== action.payload);
       state.visitedUserInfo.followers = updatedFollowers;
+    },
+    deleteVisitedUserPost: (state, action) => {
+      const updatedPosts = state.visitedUserInfo.posts.filter((post) => post._id !== action.payload);
+      state.visitedUserInfo.posts = updatedPosts;
     }
   }
 });
@@ -40,7 +44,8 @@ const visitedUserSlice = createSlice({
 export const {
   setVisitedUser,
   addNewFollower,
-  deleteFollower
+  deleteFollower,
+  deleteVisitedUserPost
 } = visitedUserSlice.actions;
 export const selectVisitedUser = (state) => state.visitedUser.visitedUserInfo;
 export default visitedUserSlice.reducer;
