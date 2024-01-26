@@ -29,7 +29,7 @@ const currentPostsSlice = createSlice({
         };
       });
     },
-    addNewReplyToPost: (state, action) => {
+    addNewReplyOnPostInCurrentPosts: (state, action) => {
       state.posts.map((post) => {
         if(post._id === action.payload.id) {
           post.replies.unshift(action.payload.replyId);
@@ -45,7 +45,7 @@ export const {
   deletePostFromCurrentPosts,
   addNewLikeOnPostInCurrentPosts,
   deleteLikeOnPostInCurrentPosts,
-  addNewReplyToPost
+  addNewReplyOnPostInCurrentPosts
 } = currentPostsSlice.actions;
 export const selectCurrentPosts = (state) => state.currentPosts.posts;
 export default currentPostsSlice.reducer;
