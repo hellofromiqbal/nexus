@@ -6,7 +6,7 @@ import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 
 import { useDispatch } from 'react-redux';
 import { addNewFollower, deleteFollower } from '@/store/visitedUserSlice';
-import { addNewFollowing, deleteFollowing } from '@/store/currentUserSlice';
+import { addNewFollowingToCurrentUser, deleteFollowingFromCurrentUser } from '@/store/currentUserSlice';
 
 const FollowButton = ({ currentUserId, details }) => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const FollowButton = ({ currentUserId, details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(addNewFollowing({ user: details }));
+        dispatch(addNewFollowingToCurrentUser({ user: details }));
         dispatch(addNewFollower({ user: result.data }));
         notifySuccess(result.message);
       };
@@ -46,7 +46,7 @@ const FollowButton = ({ currentUserId, details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(deleteFollowing(details?._id));
+        dispatch(deleteFollowingFromCurrentUser(details?._id));
         dispatch(deleteFollower(currentUserId));
         notifySuccess(result.message);
       };

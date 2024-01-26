@@ -27,10 +27,10 @@ const currentUserSlice = createSlice({
     setCurrentUser: (state, action) => {
       state.currentUserInfo = action.payload;
     },
-    addNewFollowing: (state, action) => {
+    addNewFollowingToCurrentUser: (state, action) => {
       state.currentUserInfo.following.unshift({ ...action.payload, createdAt: new Date().toISOString(), _id: nanoid(24) });
     },
-    deleteFollowing: (state, action) => {
+    deleteFollowingFromCurrentUser: (state, action) => {
       const updatedFollowing = state.currentUserInfo.following.filter((user) => user.user._id !== action.payload);
       state.currentUserInfo.following = updatedFollowing;
     }
@@ -39,8 +39,8 @@ const currentUserSlice = createSlice({
 
 export const {
   setCurrentUser,
-  addNewFollowing,
-  deleteFollowing
+  addNewFollowingToCurrentUser,
+  deleteFollowingFromCurrentUser
 } = currentUserSlice.actions;
 export const selectCurrentUser = (state) => state.currentUser.currentUserInfo;
 export default currentUserSlice.reducer;
