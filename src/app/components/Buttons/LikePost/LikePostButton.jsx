@@ -9,7 +9,7 @@ import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { addNewLikeOnPostInCurrentPosts, deleteLikeOnPostInCurrentPosts } from '@/store/currentPostsSlice';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import { addNewLikeOnPostInVisitedPost, deleteLikeOnPostInVisitedPost } from '@/store/visitedPostSlice';
-import { addNewLikeOnPostInVisitedUserPost, deleteLikeOnPostInVisitedUserPost } from '@/store/visitedUserSlice';
+import { addNewLikeOnLikedPostInVisitedUserLikedPost, addNewLikeOnPostInVisitedUserPost, deleteLikeOnLikedPostInVisitedUserLikedPost, deleteLikeOnPostInVisitedUserPost } from '@/store/visitedUserSlice';
 
 const LikePostButton = ({ details }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -33,6 +33,7 @@ const LikePostButton = ({ details }) => {
         dispatch(addNewLikeOnPostInCurrentPosts({ id: details?._id, currentUser }));
         dispatch(addNewLikeOnPostInVisitedPost(currentUser));
         dispatch(addNewLikeOnPostInVisitedUserPost({ id: details?._id, currentUser }));
+        dispatch(addNewLikeOnLikedPostInVisitedUserLikedPost({ id: details?._id, currentUser }));
         notifySuccess(result.message);
       };
     } catch (error) {
@@ -56,7 +57,8 @@ const LikePostButton = ({ details }) => {
         const result = await res.json();
         dispatch(deleteLikeOnPostInCurrentPosts({ id: details?._id, currentUserId: currentUser?._id }));
         dispatch(deleteLikeOnPostInVisitedPost({ currentUserId: currentUser?._id }))
-        dispatch(deleteLikeOnPostInVisitedUserPost({ id: details?._id, currentUserId: currentUser?._id }))
+        dispatch(deleteLikeOnPostInVisitedUserPost({ id: details?._id, currentUserId: currentUser?._id }));
+        dispatch(deleteLikeOnLikedPostInVisitedUserLikedPost({ id: details?._id, currentUserId: currentUser?._id }));
         notifySuccess(result.message);
       };
     } catch (error) {
