@@ -61,15 +61,8 @@ const visitedUserSlice = createSlice({
       });
     },
     deleteLikeOnLikedPostInVisitedUserLikedPost: (state, action) => {
-      state.visitedUserInfo.likedPosts.map((post) => {
-        if(post.post._id === action.payload.id) {
-          post.post.likes.map((like) => {
-            if(like.author._id === action.payload.currentUserId) {
-              post.post.likes = post.post.likes.filter((like) => like.author._id !== action.payload.currentUserId);
-            };
-          });
-        };
-      });
+      const updatedLikedPosts = state.visitedUserInfo.likedPosts.filter((post) => post.post._id !== action.payload.id);
+      state.visitedUserInfo.likedPosts = updatedLikedPosts;
     }
   }
 });
