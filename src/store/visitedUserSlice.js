@@ -40,8 +40,9 @@ const visitedUserSlice = createSlice({
     },
     addNewLikeOnPostInVisitedUserPost: (state, action) => {
       state.visitedUserInfo.posts.map((post) => {
-        if(post._id === action.payload.id) {
+        if(post._id === action.payload.details._id) {
           post.likes.unshift({ _id: nanoid(), author: action.payload.currentUser, createdAt: new Date().toISOString() });
+          state.visitedUserInfo.likedPosts.unshift({ _id: nanoid(), post: { ...action.payload.details }, createdAt: new Date().toISOString() });
         }
       })
     },

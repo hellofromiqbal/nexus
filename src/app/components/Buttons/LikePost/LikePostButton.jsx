@@ -32,7 +32,7 @@ const LikePostButton = ({ details }) => {
         const result = await res.json();
         dispatch(addNewLikeOnPostInCurrentPosts({ id: details?._id, currentUser }));
         dispatch(addNewLikeOnPostInVisitedPost(currentUser));
-        dispatch(addNewLikeOnPostInVisitedUserPost({ id: details?._id, currentUser }));
+        dispatch(addNewLikeOnPostInVisitedUserPost({ details, currentUser }));
         dispatch(addNewLikeOnLikedPostInVisitedUserLikedPost({ id: details?._id, currentUser }));
         notifySuccess(result.message);
       };
