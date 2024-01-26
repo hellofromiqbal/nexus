@@ -14,13 +14,13 @@ const visitedPostSlice = createSlice({
     setVisitedPost: (state, action) => {
       state.visitedPostInfo = action.payload;
     },
-    addNewPostOnVisitedPost: (state, action) => {
+    addNewReplyOnVisitedPost: (state, action) => {
       state.visitedPostInfo.replies.unshift(action.payload);
     },
-    addLikeOnVisitedPost: (state, action) => {
+    addNewLikeOnPostInVisitedPost: (state, action) => {
       state.visitedPostInfo.likes.unshift({ _id: nanoid(), author: action.payload, createdAt: new Date().toISOString() });
     },
-    deleteLikeOnVisitedPost: (state, action) => {
+    deleteLikeOnPostInVisitedPost: (state, action) => {
       const updatedLikes = state.visitedPostInfo.likes.filter((likes) => likes.author._id !== action.payload.currentUserId);
       state.visitedPostInfo.likes = updatedLikes;
     }
@@ -29,9 +29,9 @@ const visitedPostSlice = createSlice({
 
 export const {
   setVisitedPost,
-  addNewPostOnVisitedPost,
-  addLikeOnVisitedPost,
-  deleteLikeOnVisitedPost
+  addNewReplyOnVisitedPost,
+  addNewLikeOnPostInVisitedPost,
+  deleteLikeOnPostInVisitedPost
 } = visitedPostSlice.actions;
 export const selectVisitedPost = (state) => state.visitedPost.visitedPostInfo;
 export default visitedPostSlice.reducer;

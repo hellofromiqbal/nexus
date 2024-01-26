@@ -11,7 +11,7 @@ import { useParams } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import Spinner from '../../Spinner/Spinner';
-import { addNewPostOnVisitedPost } from '@/store/visitedPostSlice';
+import { addNewReplyOnVisitedPost } from '@/store/visitedPostSlice';
 import { addNewReplyOnPostInCurrentPosts } from '@/store/currentPostsSlice';
 
 const CreateReplyForm = () => {
@@ -38,7 +38,7 @@ const CreateReplyForm = () => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(addNewPostOnVisitedPost({ ...result.data, author: currentUser }));
+        dispatch(addNewReplyOnVisitedPost({ ...result.data, author: currentUser }));
         dispatch(addNewReplyOnPostInCurrentPosts({ id, replyId: result.data._id }));
         reset();
         notifySuccess(result.message);
