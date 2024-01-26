@@ -64,7 +64,17 @@ export const POST = async (request, { params }) => {
     };
 
     currentUser.posts.pull(params.id);
+    currentUser.likedPosts.pull({ post: params.id });
     currentUser.save();
+
+    const postLikes = document.likes;
+    await Promise.all(postLikes.map(async (like) => {
+      const user = await User.findById(like.author);
+      if (user) {
+        await user.likedPosts.pull({ post: params.id });
+        await user.save();
+      }
+    }));
 
     const postReplies = document.replies;
     await Reply.deleteMany({ _id: { $in: postReplies } });
