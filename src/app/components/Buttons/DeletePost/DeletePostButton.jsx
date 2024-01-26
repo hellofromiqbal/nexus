@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FaRegTrashCan } from "react-icons/fa6";
 
 import { useDispatch } from 'react-redux';
-import { deletePost } from '@/store/currentPostsSlice';
+import { deletePostFromCurrentPosts } from '@/store/currentPostsSlice';
 
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { deleteVisitedUserPost } from '@/store/visitedUserSlice';
@@ -25,7 +25,7 @@ const DeletePostButton = ({ id, currentUserId }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(deletePost(id));
+        dispatch(deletePostFromCurrentPosts(id));
         dispatch(deleteVisitedUserPost(id));
         notifySuccess(result.message);
       };

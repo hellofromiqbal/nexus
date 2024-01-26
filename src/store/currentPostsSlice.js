@@ -9,20 +9,20 @@ const currentPostsSlice = createSlice({
     setCurrentPosts: (state, action) => {
       state.posts = action.payload;
     },
-    addNewPost: (state, action) => {
+    addNewPostToCurrentPosts: (state, action) => {
       state.posts.unshift(action.payload);
     },
-    deletePost: (state, action) => {
+    deletePostFromCurrentPosts: (state, action) => {
       state.posts = state.posts.filter((post) => post._id !== action.payload);
     },
-    likePost: (state, action) => {
+    addNewLikeOnPostInCurrentPosts: (state, action) => {
       state.posts.map((post) => {
         if(post._id === action.payload.id) {
           post.likes.unshift({ _id: nanoid(), author: action.payload.currentUser, createdAt: new Date().toISOString() });
         }
       });
     },
-    unlikePost: (state, action) => {
+    deleteLikeOnPostInCurrentPosts: (state, action) => {
       state.posts.map((post) => {
         if(post._id === action.payload.id) {
           post.likes = post.likes.filter((like) => like.author._id !== action.payload.currentUserId);
@@ -41,10 +41,10 @@ const currentPostsSlice = createSlice({
 
 export const {
   setCurrentPosts,
-  addNewPost,
-  deletePost,
-  likePost,
-  unlikePost,
+  addNewPostToCurrentPosts,
+  deletePostFromCurrentPosts,
+  addNewLikeOnPostInCurrentPosts,
+  deleteLikeOnPostInCurrentPosts,
   addNewReplyToPost
 } = currentPostsSlice.actions;
 export const selectCurrentPosts = (state) => state.currentPosts.posts;
