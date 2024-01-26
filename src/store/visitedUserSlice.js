@@ -63,6 +63,10 @@ const visitedUserSlice = createSlice({
     deleteLikeOnLikedPostInVisitedUserLikedPost: (state, action) => {
       const updatedLikedPosts = state.visitedUserInfo.likedPosts.filter((post) => post.post._id !== action.payload.id);
       state.visitedUserInfo.likedPosts = updatedLikedPosts;
+    },
+    deletePostInVisitedUserLikedPost: (state, action) => {
+      const updatedLikedPosts = state.visitedUserInfo.likedPosts.filter((post) => post.post._id !== action.payload.id);
+      state.visitedUserInfo.likedPosts = updatedLikedPosts;
     }
   }
 });
@@ -75,7 +79,8 @@ export const {
   addNewLikeOnPostInVisitedUserPost,
   deleteLikeOnPostInVisitedUserPost,
   addNewLikeOnLikedPostInVisitedUserLikedPost,
-  deleteLikeOnLikedPostInVisitedUserLikedPost
+  deleteLikeOnLikedPostInVisitedUserLikedPost,
+  deletePostInVisitedUserLikedPost
 } = visitedUserSlice.actions;
 export const selectVisitedUser = (state) => state.visitedUser.visitedUserInfo;
 export default visitedUserSlice.reducer;

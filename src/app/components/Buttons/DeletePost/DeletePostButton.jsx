@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { deletePostFromCurrentPosts } from '@/store/currentPostsSlice';
 
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
-import { deleteVisitedUserPost } from '@/store/visitedUserSlice';
+import { deletePostInVisitedUserLikedPost, deleteVisitedUserPost } from '@/store/visitedUserSlice';
 
 const DeletePostButton = ({ id, currentUserId }) => {
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ const DeletePostButton = ({ id, currentUserId }) => {
         const result = await res.json();
         dispatch(deletePostFromCurrentPosts(id));
         dispatch(deleteVisitedUserPost(id));
+        dispatch(deletePostInVisitedUserLikedPost({ id, currentUserId }));
         notifySuccess(result.message);
       };
     } catch (error) {
