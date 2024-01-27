@@ -18,10 +18,19 @@ export const GET = async (request, { params }) => {
     })
     .populate({
       path: 'replies',
-      populate: {
-        path: 'author',
-        model: 'User'
-      }
+      populate: [
+        {
+          path: 'author',
+          model: 'User'
+        },
+        {
+          path: 'likes',
+          populate: {
+            path: 'author',
+            model: 'User'
+          }
+        }
+      ]
     });
     
     if(!document) {
