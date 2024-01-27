@@ -27,6 +27,23 @@ const visitedPostSlice = createSlice({
     deleteLikeOnPostInVisitedPost: (state, action) => {
       const updatedLikes = state.visitedPostInfo.likes.filter((likes) => likes.author._id !== action.payload.currentUserId);
       state.visitedPostInfo.likes = updatedLikes;
+    },
+    addNewLikeOnReplyInVisitedPost: (state, action) => {
+      console.log(state.visitedPostInfo.replies);
+      console.log(action.payload);
+      state.visitedPostInfo.replies.map((reply) => {
+        if(reply._id === action.payload.replyId) {
+          reply.likes.unshift({ _id: nanoid(), author: action.payload.currentUser, createdAt: new Date().toISOString() });
+        };
+      });
+    },
+    deleteLikeOnReplyInVisitedPost: (state, action) => {
+      state.visitedPostInfo.replies.map((reply) => {
+        if(reply._id === action.payload.replyId) {
+          const updatedReplyLikes = reply.likes.filter((like) => like.author._id !== action.payload.currentUserId);
+          reply.likes = updatedReplyLikes;
+        };
+      });
     }
   }
 });
@@ -36,7 +53,9 @@ export const {
   addNewReplyOnVisitedPost,
   deleteReplyOnVisitedPost,
   addNewLikeOnPostInVisitedPost,
-  deleteLikeOnPostInVisitedPost
+  deleteLikeOnPostInVisitedPost,
+  addNewLikeOnReplyInVisitedPost,
+  deleteLikeOnReplyInVisitedPost
 } = visitedPostSlice.actions;
 export const selectVisitedPost = (state) => state.visitedPost.visitedPostInfo;
 export default visitedPostSlice.reducer;

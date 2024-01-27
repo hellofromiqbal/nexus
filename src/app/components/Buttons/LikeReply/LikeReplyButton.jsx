@@ -7,10 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { selectCurrentUser } from '@/store/currentUserSlice';
+import { addNewLikeOnReplyInVisitedPost, deleteLikeOnReplyInVisitedPost } from '@/store/visitedPostSlice';
 
 const LikeReplyButton = ({ details }) => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-  const isPostAlreadyLiked = details?.likes?.find((like) => like?.author?._id === currentUser?._id);
+  const isReplyAlreadyLiked = details?.likes?.find((like) => like?.author?._id === currentUser?._id);
 
   const handleLikeButton = async () => {
     try {
@@ -26,6 +28,7 @@ const LikeReplyButton = ({ details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        dispatch(addNewLikeOnReplyInVisitedPost({ replyId: details?._id, currentUser: currentUser }));
         notifySuccess(result.message);
       };
     } catch (error) {
@@ -39,7 +42,7 @@ const LikeReplyButton = ({ details }) => {
         cache: 'no-store',
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ currentUserId: currentUser?._id, postId: details?._id })
+        body: JSON.stringify({ replyId: details?._id, currentUserId: currentUser?._id })
       });
 
       if(!res.ok) {
@@ -47,6 +50,7 @@ const LikeReplyButton = ({ details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        dispatch(deleteLikeOnReplyInVisitedPost({ replyId: details?._id, currentUserId: currentUser?._id }));
         notifySuccess(result.message);
       };
     } catch (error) {
@@ -57,9 +61,9 @@ const LikeReplyButton = ({ details }) => {
   return (
     <button
       className='flex gap-2'
-      onClick={isPostAlreadyLiked ? handleUnlikeButton : handleLikeButton}
+      onClick={isReplyAlreadyLiked ? handleUnlikeButton : handleLikeButton}
     >
-      {isPostAlreadyLiked ?
+      {isReplyAlreadyLiked ?
         <FaHeart className='text-white w-[18px] h-[18px]'/>
         :
         <FaRegHeart className='text-white w-[18px] h-[18px]'/>
