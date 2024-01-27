@@ -1,24 +1,51 @@
 'use client'
 
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { editProfileFormSchema } from '@/helpers/zodSchema';
 
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '@/store/currentUserSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentUser, setCurrentUser } from '@/store/currentUserSlice';
 import Spinner from '../../Spinner/Spinner';
+import { notifyFailed, notifySuccess } from '@/helpers/toaster';
+import { selectCurrentPosts } from '@/store/currentPostsSlice';
 
 
 const EditProfileForm = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const currentUser = useSelector(selectCurrentUser);
+  const currentPosts = useSelector(selectCurrentPosts);
+  const dispatch = useDispatch();
   
   const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: zodResolver(editProfileFormSchema) });
   const submittedData = async (data) => {
     console.log(data);
+    setIsLoading((prev) => !prev);
+    try {
+      const res = await fetch(`/api/users/${currentUser?.username}/edit`, {
+        cache: 'no-store',
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if(!res.ok) {
+        const result = await res.json();
+        throw new Error(result.error);
+      } else {
+        reset();
+        const result = await res.json();
+        dispatch(setCurrentUser(result.data));
+        notifySuccess(result.message);
+        window.location.href = `/dashboard/profile/${result.data.username}`;
+      }
+    } catch (error) {
+      notifyFailed(error.message);
+    };
+    setIsLoading((prev) => !prev);
   };
   
   return (
