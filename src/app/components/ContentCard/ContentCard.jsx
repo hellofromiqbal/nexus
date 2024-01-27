@@ -8,6 +8,7 @@ import { selectCurrentUser } from '@/store/currentUserSlice';
 import DeletePostButton from '../Buttons/DeletePost/DeletePostButton';
 import LikePostButton from '../Buttons/LikePost/LikePostButton';
 import { timePosted } from '@/helpers/moment';
+import DeleteReplyButton from '../Buttons/DeleteReply/DeleteReplyButton';
 
 const ContentCard = ({ details, type }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -43,7 +44,7 @@ const ContentCard = ({ details, type }) => {
             </>
             :
             <>
-              <small className='text-white'>Hello world</small>
+              <DeleteReplyButton id={details?._id}/>
             </>
           }
           
