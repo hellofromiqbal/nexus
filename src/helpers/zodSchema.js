@@ -29,3 +29,15 @@ export const createPostFormSchema = z.object({
 export const createReplyFormSchema = z.object({
   textContent: z.string().min(1, { message: "Text content must be at least 1 or more characters long. "}).max(1000, { message: "Text content must be 1000 or fewer characters long." }),
 });
+
+export const editProfileFormSchema = z.object({
+  username: z.string({
+    required_error: "Username required",
+  }).min(6, { message: "Username at least 6 or more characters long." }).max(30, { message: "Username at least 30 or fewer characters long." }),
+  fullname: z.string({
+    required_error: "Fullname is required.",
+    invalid_type_error: "Fullname must be a string."
+  }).min(2, { message: "Fullname must be at least 2 or more characters long. "}).max(30, { message: "Fullname must be 30 or fewer characters long." }),
+  bio: z.string(),
+  location: z.string()
+});
