@@ -1,12 +1,18 @@
 'use client'
 
-import { notifyFailed, notifySuccess } from '@/helpers/toaster';
-import { useParams } from 'next/navigation';
 import React from 'react';
+
+import { useParams } from 'next/navigation';
 import { FaRegTrashCan } from "react-icons/fa6";
+
+import { useDispatch } from 'react-redux';
+import { notifyFailed, notifySuccess } from '@/helpers/toaster';
+import { deleteReplyOnVisitedPost } from '@/store/visitedPostSlice';
+
 
 const DeleteReplyButton = ({ id }) => {
   const params = useParams();
+  const dispatch = useDispatch();
   const handleDeleteReply = async () => {
     console.log({ contentRefId: params.id, contentId: id });
     try {
@@ -21,6 +27,7 @@ const DeleteReplyButton = ({ id }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
+        dispatch(deleteReplyOnVisitedPost({ contentId: id }));
         notifySuccess(result.message);
       }
     } catch (error) {
