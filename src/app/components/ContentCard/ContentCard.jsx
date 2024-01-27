@@ -8,8 +8,6 @@ import { selectCurrentUser } from '@/store/currentUserSlice';
 import DeletePostButton from '../Buttons/DeletePost/DeletePostButton';
 import LikePostButton from '../Buttons/LikePost/LikePostButton';
 import { timePosted } from '@/helpers/moment';
-import LikeReplyButton from '../Buttons/LikeReply/LikeReplyButton';
-import DeleteReplyButton from '../Buttons/DeleteReply/DeleteReplyButton';
 
 const ContentCard = ({ details, type }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -45,16 +43,7 @@ const ContentCard = ({ details, type }) => {
             </>
             :
             <>
-              <LikeReplyButton/>
-              <Link href={`/dashboard/replies/${details?._id}`} className='flex justify-end gap-2'>
-                <FaRegComment className='text-white w-[18px] h-[18px]'/>
-                <small className='text-white'>{details?.replies?.length}</small>
-              </Link>
-              {details?.author?.username === currentUser?.username ?
-                <DeleteReplyButton id={details?._id} currentUserId={currentUser?._id}/>
-                :
-                ''
-              }
+              <small className='text-white'>Hello world</small>
             </>
           }
           
