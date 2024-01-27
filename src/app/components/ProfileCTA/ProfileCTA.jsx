@@ -13,7 +13,7 @@ const ProfileCTA = ({ details }) => {
   return (
     <>
       {details?._id === currentUser?._id ?
-        <Link href={`/dashboard/profile/1/edit`} className="px-4 py-1 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-full w-max">Edit</Link>
+        <Link href={`/dashboard/profile/${details?.username}/edit`} className="px-4 py-1 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-full w-max">Edit</Link>
         :
         <FollowButton currentUserId={currentUser?._id} details={details}/>
       }
