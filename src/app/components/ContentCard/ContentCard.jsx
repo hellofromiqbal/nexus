@@ -9,6 +9,7 @@ import DeletePostButton from '../Buttons/DeletePost/DeletePostButton';
 import LikePostButton from '../Buttons/LikePost/LikePostButton';
 import { timePosted } from '@/helpers/moment';
 import DeleteReplyButton from '../Buttons/DeleteReply/DeleteReplyButton';
+import LikeReplyButton from '../Buttons/LikeReply/LikeReplyButton';
 
 const ContentCard = ({ details, type }) => {
   const currentUser = useSelector(selectCurrentUser);
@@ -44,6 +45,7 @@ const ContentCard = ({ details, type }) => {
             </>
             :
             <>
+              <LikeReplyButton details={details}/>
               <DeleteReplyButton id={details?._id}/>
             </>
           }
