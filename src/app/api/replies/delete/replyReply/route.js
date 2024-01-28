@@ -7,7 +7,6 @@ export const PUT = async (request, response) => {
   try {
     await connectMongoDB();
     const { contentRefId, contentId } = await request.json();
-    console.log({ contentRefId, contentId });
 
     const isContentRefExist = await Reply.findById(contentRefId);
     if(!isContentRefExist) {
