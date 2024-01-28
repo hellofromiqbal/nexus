@@ -44,7 +44,6 @@ const currentPostsSlice = createSlice({
           post.replies = updatedReplies;
         };
       });
-      console.log(state.posts);
     }
   }
 });
