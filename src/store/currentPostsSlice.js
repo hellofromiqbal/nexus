@@ -35,14 +35,16 @@ const currentPostsSlice = createSlice({
           post.replies.unshift(action.payload.replyId);
         };
       });
+      console.log(state.posts);
     },
     deleteReplyOnPostInCurrentPosts: (state, action) => {
       state.posts.map((post) => {
         if(post._id === action.payload.id) {
-          const updatedReplies = post.replies.filter((replyId) => replyId === action.payload.replyId);
+          const updatedReplies = post.replies.filter((replyId) => replyId !== action.payload.replyId);
           post.replies = updatedReplies;
         };
       });
+      console.log(state.posts);
     }
   }
 });
