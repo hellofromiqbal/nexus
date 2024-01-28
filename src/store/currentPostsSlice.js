@@ -35,6 +35,14 @@ const currentPostsSlice = createSlice({
           post.replies.unshift(action.payload.replyId);
         };
       });
+    },
+    deleteReplyOnPostInCurrentPosts: (state, action) => {
+      state.posts.map((post) => {
+        if(post._id === action.payload.id) {
+          const updatedReplies = post.replies.filter((replyId) => replyId === action.payload.replyId);
+          post.replies = updatedReplies;
+        };
+      });
     }
   }
 });
@@ -45,7 +53,8 @@ export const {
   deletePostFromCurrentPosts,
   addNewLikeOnPostInCurrentPosts,
   deleteLikeOnPostInCurrentPosts,
-  addNewReplyOnPostInCurrentPosts
+  addNewReplyOnPostInCurrentPosts,
+  deleteReplyOnPostInCurrentPosts,
 } = currentPostsSlice.actions;
 export const selectCurrentPosts = (state) => state.currentPosts.posts;
 export default currentPostsSlice.reducer;

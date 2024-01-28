@@ -8,6 +8,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { useDispatch } from 'react-redux';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { deleteReplyOnVisitedPost } from '@/store/visitedPostSlice';
+import { deleteReplyOnPostInCurrentPosts } from '@/store/currentPostsSlice';
 
 
 const DeleteReplyButton = ({ id }) => {
@@ -28,6 +29,7 @@ const DeleteReplyButton = ({ id }) => {
       } else {
         const result = await res.json();
         dispatch(deleteReplyOnVisitedPost({ contentId: id }));
+        dispatch(deleteReplyOnPostInCurrentPosts({ id: params.id, replyId: id }));
         notifySuccess(result.message);
       }
     } catch (error) {
