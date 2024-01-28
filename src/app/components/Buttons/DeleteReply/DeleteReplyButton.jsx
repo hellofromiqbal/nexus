@@ -9,12 +9,11 @@ import { useDispatch } from 'react-redux';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { deleteReplyOnVisitedPost } from '@/store/visitedPostSlice';
 import { deleteReplyOnPostInCurrentPosts } from '@/store/currentPostsSlice';
+import { deleteReplyOnVisitedReply } from '@/store/visitedReplySlice';
 
 
 const DeleteReplyButton = ({ id, contentIn }) => {
   const params = useParams();
-  console.log(params);
-  console.log(id);
   const dispatch = useDispatch();
   const handleDeleteReply = async () => {
     try {
@@ -33,7 +32,9 @@ const DeleteReplyButton = ({ id, contentIn }) => {
         if(contentIn === 'post') {
           dispatch(deleteReplyOnVisitedPost({ contentId: id }));
           dispatch(deleteReplyOnPostInCurrentPosts({ id: params.id, replyId: id }));
-        };
+        } else {
+          dispatch(deleteReplyOnVisitedReply({ contentId: id }));
+        }
         notifySuccess(result.message);
       }
     } catch (error) {
