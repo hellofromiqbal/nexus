@@ -32,7 +32,7 @@ const MainReplyDetail = () => {
         <ContentCard details={visitedReply} type='reply'/>
       </div>
       <div className='px-4 pb-4'>
-        <CreateReplyForm/>
+        <CreateReplyForm type='reply'/>
       </div>
       <div>
         <ContentList list={visitedReply?.replies} type='reply'/>

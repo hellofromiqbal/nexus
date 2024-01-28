@@ -11,10 +11,9 @@ import { useParams } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import Spinner from '../../Spinner/Spinner';
-import { addNewReplyOnVisitedPost } from '@/store/visitedPostSlice';
-import { addNewReplyOnPostInCurrentPosts } from '@/store/currentPostsSlice';
+import { addNewReplyOnVisitedReply } from '@/store/visitedReplySlice';
 
-const CreateReplyForm = () => {
+const CreateReplyForm = ({ type = 'post' }) => {
   const dispatch = useDispatch();
   const params = useParams();
   const id = params.id;
@@ -26,20 +25,19 @@ const CreateReplyForm = () => {
     if(data.textContent.length < 1) return;
     setIsLoading((prev) => !prev);
     try {
-      const res = await fetch(`/api/posts/${id}/replies/`, {
+      const url = type === 'post' ? `/api/posts/${id}/replies/` : `/api/replies/${id}/replies/`;
+      const res = await fetch(url, {
         cache: 'no-cache',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ authorId: currentUser?._id, ...data })
       });
-
       if(!res.ok) {
         const result = await res.json();
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(addNewReplyOnVisitedPost({ ...result.data, author: currentUser }));
-        dispatch(addNewReplyOnPostInCurrentPosts({ id, replyId: result.data._id }));
+        dispatch(addNewReplyOnVisitedReply({ ...result.data, author: currentUser }));
         reset();
         notifySuccess(result.message);
       };
