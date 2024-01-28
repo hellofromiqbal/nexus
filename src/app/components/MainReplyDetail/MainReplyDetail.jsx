@@ -35,7 +35,11 @@ const MainReplyDetail = () => {
         <CreateReplyForm type='reply'/>
       </div>
       <div>
-        <ContentList list={visitedReply?.replies} type='reply'/>
+        <ContentList
+          list={visitedReply?.replies}
+          type='reply'
+          contentIn='reply'
+        />
       </div>
     </>
   )

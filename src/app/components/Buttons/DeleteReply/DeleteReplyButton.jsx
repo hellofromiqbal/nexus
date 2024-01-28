@@ -11,13 +11,15 @@ import { deleteReplyOnVisitedPost } from '@/store/visitedPostSlice';
 import { deleteReplyOnPostInCurrentPosts } from '@/store/currentPostsSlice';
 
 
-const DeleteReplyButton = ({ id }) => {
+const DeleteReplyButton = ({ id, contentIn }) => {
   const params = useParams();
+  console.log(params);
+  console.log(id);
   const dispatch = useDispatch();
   const handleDeleteReply = async () => {
-    console.log({ contentRefId: params.id, contentId: id });
     try {
-      const res = await fetch('/api/replies/delete', {
+      const url = contentIn === 'post' ? '/api/replies/delete/postReply' : '/api/replies/delete/replyReply';
+      const res = await fetch(url, {
         cache: 'no-cache',
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -28,8 +30,10 @@ const DeleteReplyButton = ({ id }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(deleteReplyOnVisitedPost({ contentId: id }));
-        dispatch(deleteReplyOnPostInCurrentPosts({ id: params.id, replyId: id }));
+        if(contentIn === 'post') {
+          dispatch(deleteReplyOnVisitedPost({ contentId: id }));
+          dispatch(deleteReplyOnPostInCurrentPosts({ id: params.id, replyId: id }));
+        };
         notifySuccess(result.message);
       }
     } catch (error) {

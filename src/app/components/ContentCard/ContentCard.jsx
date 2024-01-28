@@ -11,7 +11,7 @@ import { timePosted } from '@/helpers/moment';
 import DeleteReplyButton from '../Buttons/DeleteReply/DeleteReplyButton';
 import LikeReplyButton from '../Buttons/LikeReply/LikeReplyButton';
 
-const ContentCard = ({ details, type }) => {
+const ContentCard = ({ details, type, contentIn }) => {
   const currentUser = useSelector(selectCurrentUser);
   return (
     <div className='p-4 flex gap-4 border-t border-gray-700'>
@@ -50,7 +50,7 @@ const ContentCard = ({ details, type }) => {
                 <FaRegComment className='text-white w-[18px] h-[18px]'/>
                 <small className='text-white'>{details?.replies?.length}</small>
               </Link>
-              <DeleteReplyButton id={details?._id}/>
+              <DeleteReplyButton id={details?._id} currentUserId={currentUser?._id} contentIn={contentIn}/>
             </>
           }
           
