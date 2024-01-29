@@ -1,4 +1,5 @@
 import User from '@/models/userModel';
+import Post from '@/models/postModel';
 import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
 
