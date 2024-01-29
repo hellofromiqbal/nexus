@@ -30,7 +30,6 @@ const visitedReplySlice = createSlice({
     },
     addNewLikeOnVisitedReply: (state, action) => {
       state.visitedReplyInfo.likes.unshift({ _id: nanoid(), author: action.payload, createdAt: new Date().toISOString() });
-      console.log(state.visitedReplyInfo.likes);
     },
     deleteLikeOnVisitedReply: (state, action) => {
       const updatedLikes = state.visitedReplyInfo.likes.filter((like) => like.author._id !== action.payload.currentUserId );
