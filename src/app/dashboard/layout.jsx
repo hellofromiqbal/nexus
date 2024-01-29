@@ -12,9 +12,9 @@ const DashboardLayout = ({ children }) => {
             <Navbar/>
           </div>
         </div>
-        <div className='basis-full md:basis-[75%] lg:basis-[50%]'>
+        {/* <div className='basis-full md:basis-[75%] lg:basis-[50%]'>
           {children}
-        </div>
+        </div> */}
         <div className='hidden lg:block lg:basis-[25%] relative'>
           <div className='bg-gray-800 rounded-md shadow-md overflow-hidden sticky top-4'>
             <h1>Advertise</h1>
