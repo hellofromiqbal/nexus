@@ -9,7 +9,7 @@ const LogoutButton = ({ location = 'normal' }) => {
   const router = useRouter();
   const handleLogout = async () => {
     try {
-      const res = await fetch('/api/users/logout');
+      const res = await fetch('/api/users/logout', { cache: 'no-store' });
       if(!res.ok) {
         const result = await res.json();
         throw new Error(result.message);

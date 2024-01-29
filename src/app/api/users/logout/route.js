@@ -12,7 +12,7 @@ export const GET = async (request, response) => {
   } catch (error) {
     return NextResponse.json({
       success: false,
-      message: 'Failed to logout.'
+      message: error.message
     }, { status: 500 });
   };
 };
