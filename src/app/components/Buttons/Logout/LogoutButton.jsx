@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { IoExit } from "react-icons/io5";
 
-const LogoutButton = () => {
+const LogoutButton = ({ location = 'normal' }) => {
   const router = useRouter();
   const handleLogout = async () => {
     try {
@@ -25,11 +25,15 @@ const LogoutButton = () => {
 
   return (
     <button
-      className='p-4 w-full font-medium text-white hover:text-black hover:bg-green-500 flex items-center gap-4'
+      className={`p-4 ${location === 'normal' ? 'hidden md:flex w-full' : 'rounded-md'} font-medium text-white hover:text-black hover:bg-green-500 items-center gap-4`}
       onClick={handleLogout}
     >
       <IoExit className='w-[25px] h-[25px]'/>
-      <span>Logout</span>
+      {location === 'normal' ?
+        <span>Logout</span>
+        :
+        ''
+      }
     </button>
   )
 };

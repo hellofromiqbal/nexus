@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <ul className='flex flex-row md:flex-col'>
+      <ul className='flex flex-row justify-evenly md:flex-col'>
         {staticData.navbar.map((navLink) => (
           <NavLink
             key={navLink.name}

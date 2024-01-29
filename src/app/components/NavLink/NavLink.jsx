@@ -27,8 +27,8 @@ const NavLink = ({ name, url }) => {
   };
   
   return (
-    <li className={name !== 'profile' ? 'flex' : 'hidden md:flex'}>
-      <Link href={url} className={`p-4 w-full font-medium hover:text-black ${pathname === url ? 'bg-green-500 text-black' : 'text-white'} hover:bg-green-500 flex items-center gap-4`}>
+    <li className={`w-full ${name !== 'profile' ? 'flex' : 'hidden md:flex'}`}>
+      <Link href={url} className={`p-4 w-full font-medium hover:text-black ${pathname === url ? 'bg-green-500 text-black' : 'text-white'} hover:bg-green-500 flex justify-center md:justify-normal items-center gap-4`}>
         {icons[name]}
         <span className='hidden md:block capitalize'>{name}</span>
       </Link>
