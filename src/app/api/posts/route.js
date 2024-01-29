@@ -1,6 +1,7 @@
 import connectMongoDB from "@/libs/mongodb";
 import Post from "@/models/postModel";
 import User from "@/models/userModel";
+import Reply from "@/models/replyModel";
 import { NextResponse } from 'next/server';
 
 export const GET = async (request, response) => {
