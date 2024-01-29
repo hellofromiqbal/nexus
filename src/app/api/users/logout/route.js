@@ -7,7 +7,7 @@ export const GET = async (request, response) => {
       message: 'Logged out.'
     }, { status: 200 });
 
-    response.cookies.set('nexus', '');
+    response.cookies.delete('nexus');
     return response;
   } catch (error) {
     return NextResponse.json({
