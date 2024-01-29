@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import DashboardHead from '../components/DashboardHead/DashboardHead';
+import TrendingList from '../components/TrendingList/TrendingList';
 
 const DashboardLayout = ({ children }) => {
   return (
@@ -17,7 +18,7 @@ const DashboardLayout = ({ children }) => {
         </div>
         <div className='hidden lg:block lg:basis-[25%] relative'>
           <div className='bg-gray-800 rounded-md shadow-md overflow-hidden sticky top-4'>
-            <h1>Advertise</h1>
+            <TrendingList/>
           </div>
         </div>
       </div>
