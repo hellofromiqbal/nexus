@@ -16,7 +16,10 @@ const Navbar = () => {
   useEffect(() => {
     fetch('/api/users/me')
       .then((res) => res.json())
-      .then((data) => dispatch(setCurrentUser(data.data)))
+      .then((data) => {
+        console.log(data.data);
+        dispatch(setCurrentUser(data.data));
+      })
       .catch((err) => console.log(err.message));
   }, []);
 
