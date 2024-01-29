@@ -9,8 +9,8 @@ import ProfileCTA from '../ProfileCTA/ProfileCTA';
 const ProfileDetails = ({ details }) => {
   return (
     <div className='flex flex-col'>
-      <div className='h-[200px] bg-black relative'>
-        <div className='w-[150px] h-[150px] absolute right-10 -bottom-[75px] bg-red-50 rounded-full border-4 border-black'></div>
+      <div className='h-[200px] bg-gray-200 relative'>
+        <div className='w-[150px] h-[150px] absolute right-4 md:right-10 -bottom-[75px] bg-gray-200 rounded-full border-4 border-black'></div>
       </div>
       <div className='flex flex-col p-4'>
         <div className='flex flex-col gap-2'>
