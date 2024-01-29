@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import { addNewLikeOnReplyInVisitedPost, deleteLikeOnReplyInVisitedPost } from '@/store/visitedPostSlice';
+import { addNewLikeOnVisitedReply, deleteLikeOnVisitedReply } from '@/store/visitedReplySlice';
 
 const LikeReplyButton = ({ details }) => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const LikeReplyButton = ({ details }) => {
       } else {
         const result = await res.json();
         dispatch(addNewLikeOnReplyInVisitedPost({ replyId: details?._id, currentUser: currentUser }));
+        dispatch(addNewLikeOnVisitedReply(currentUser));
         notifySuccess(result.message);
       };
     } catch (error) {
@@ -52,6 +54,7 @@ const LikeReplyButton = ({ details }) => {
       } else {
         const result = await res.json();
         dispatch(deleteLikeOnReplyInVisitedPost({ replyId: details?._id, currentUserId: currentUser?._id }));
+        dispatch(deleteLikeOnVisitedReply({ currentUserId: currentUser?._id }));
         notifySuccess(result.message);
       };
     } catch (error) {
