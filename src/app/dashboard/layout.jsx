@@ -7,9 +7,9 @@ const DashboardLayout = ({ children }) => {
       <div className='flex justify-center py-2'>
         <h1 className="text-4xl font-bold text-white"><span className="text-green-500">N</span>exus</h1>
       </div>
-      <div className='flex gap-4'>
-        <div className='hidden md:block md:basis-[25%] lg:basis-[25%] relative'>
-          <div className='bg-gray-800 rounded-md shadow-md overflow-hidden sticky top-4'>
+      <div className='flex md:gap-4'>
+        <div className='md:block md:basis-[25%] lg:basis-[25%] relative'>
+          <div className='bg-gray-800 rounded-md shadow-md overflow-hidden h-max fixed md:sticky bottom-0 md:top-4'>
             <Navbar/>
           </div>
         </div>
