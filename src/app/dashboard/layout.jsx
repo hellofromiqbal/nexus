@@ -17,7 +17,7 @@ const DashboardLayout = ({ children }) => {
         </div>
         <div className='hidden lg:block lg:basis-[25%] relative'>
           <div className='bg-gray-800 rounded-md shadow-md overflow-hidden sticky top-4'>
-            <Navbar/>
+            <h1>Advertise</h1>
           </div>
         </div>
       </div>
