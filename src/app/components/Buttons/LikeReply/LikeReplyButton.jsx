@@ -8,9 +8,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { notifyFailed, notifySuccess } from '@/helpers/toaster';
 import { selectCurrentUser } from '@/store/currentUserSlice';
 import { addNewLikeOnReplyInVisitedPost, deleteLikeOnReplyInVisitedPost } from '@/store/visitedPostSlice';
-import { addNewLikeOnVisitedReply, deleteLikeOnVisitedReply } from '@/store/visitedReplySlice';
+import { addNewLikeOnReplyInVisitedReply, addNewLikeOnVisitedReply, deleteLikeOnReplyInVisitedReply, deleteLikeOnVisitedReply } from '@/store/visitedReplySlice';
 
-const LikeReplyButton = ({ details }) => {
+const LikeReplyButton = ({ details, contentIn }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const isReplyAlreadyLiked = details?.likes?.find((like) => like?.author?._id === currentUser?._id);
@@ -30,8 +30,12 @@ const LikeReplyButton = ({ details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(addNewLikeOnReplyInVisitedPost({ replyId: details?._id, currentUser: currentUser }));
-        dispatch(addNewLikeOnVisitedReply(currentUser));
+        if(contentIn === 'post') {
+          dispatch(addNewLikeOnVisitedReply(currentUser));
+          dispatch(addNewLikeOnReplyInVisitedPost({ replyId: details?._id, currentUser: currentUser }));
+        } else {
+          dispatch(addNewLikeOnReplyInVisitedReply({ replyId: details?._id, currentUser: currentUser }));
+        }
         notifySuccess(result.message);
       };
     } catch (error) {
@@ -53,8 +57,12 @@ const LikeReplyButton = ({ details }) => {
         throw new Error(result.message);
       } else {
         const result = await res.json();
-        dispatch(deleteLikeOnReplyInVisitedPost({ replyId: details?._id, currentUserId: currentUser?._id }));
-        dispatch(deleteLikeOnVisitedReply({ currentUserId: currentUser?._id }));
+        if(contentIn === 'post') {
+          dispatch(deleteLikeOnReplyInVisitedPost({ replyId: details?._id, currentUserId: currentUser?._id }));
+          dispatch(deleteLikeOnVisitedReply({ currentUserId: currentUser?._id }));
+        } else {
+          dispatch(deleteLikeOnReplyInVisitedReply({ replyId: details?._id, currentUserId: currentUser?._id }));
+        }
         notifySuccess(result.message);
       };
     } catch (error) {

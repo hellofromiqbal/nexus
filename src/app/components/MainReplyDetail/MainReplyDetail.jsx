@@ -29,7 +29,10 @@ const MainReplyDetail = () => {
   return (
     <>
       <div>
-        <ContentCard details={visitedReply} type='reply'/>
+        <ContentCard details={visitedReply}
+          type='reply'
+          contentIn='post'
+        />
       </div>
       <div className='px-4 pb-4'>
         <CreateReplyForm type='reply'/>

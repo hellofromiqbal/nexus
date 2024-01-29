@@ -34,24 +34,24 @@ const visitedReplySlice = createSlice({
     deleteLikeOnVisitedReply: (state, action) => {
       const updatedLikes = state.visitedReplyInfo.likes.filter((like) => like.author._id !== action.payload.currentUserId );
       state.visitedReplyInfo.likes = updatedLikes;
+    },
+    addNewLikeOnReplyInVisitedReply: (state, action) => {
+      console.log(state.visitedReplyInfo.replies);
+      console.log(action.payload);
+      state.visitedReplyInfo.replies.map((reply) => {
+        if(reply._id === action.payload.replyId) {
+          reply.likes.unshift({ _id: nanoid(), author: action.payload.currentUser, createdAt: new Date().toISOString() });
+        };
+      });
+    },
+    deleteLikeOnReplyInVisitedReply: (state, action) => {
+      state.visitedReplyInfo.replies.map((reply) => {
+        if(reply._id === action.payload.replyId) {
+          const updatedReplyLikes = reply.likes.filter((like) => like.author._id !== action.payload.currentUserId);
+          reply.likes = updatedReplyLikes;
+        };
+      });
     }
-    // addNewLikeOnReplyInVisitedReply: (state, action) => {
-    //   console.log(state.visitedReplyInfo.replies);
-    //   console.log(action.payload);
-    //   state.visitedReplyInfo.replies.map((reply) => {
-    //     if(reply._id === action.payload.replyId) {
-    //       reply.likes.unshift({ _id: nanoid(), author: action.payload.currentUser, createdAt: new Date().toISOString() });
-    //     };
-    //   });
-    // },
-    // deleteLikeOnReplyInVisitedReply: (state, action) => {
-    //   state.visitedReplyInfo.replies.map((reply) => {
-    //     if(reply._id === action.payload.replyId) {
-    //       const updatedReplyLikes = reply.likes.filter((like) => like.author._id !== action.payload.currentUserId);
-    //       reply.likes = updatedReplyLikes;
-    //     };
-    //   });
-    // }
   }
 });
 
@@ -62,9 +62,9 @@ export const {
   addNewLikeOnPostInVisitedReply,
   deleteLikeOnPostInVisitedReply,
   addNewLikeOnVisitedReply,
-  deleteLikeOnVisitedReply
-  // addNewLikeOnReplyInVisitedReply,
-  // deleteLikeOnReplyInVisitedReply
+  deleteLikeOnVisitedReply,
+  addNewLikeOnReplyInVisitedReply,
+  deleteLikeOnReplyInVisitedReply
 } = visitedReplySlice.actions;
 export const selectVisitedReply = (state) => state.visitedReply.visitedReplyInfo;
 export default visitedReplySlice.reducer;
