@@ -16,20 +16,14 @@ const Navbar = () => {
   useEffect(() => {
     fetch('/api/users/me')
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data);
-        dispatch(setCurrentUser(data.data));
-      })
+      .then((data) => dispatch(setCurrentUser(data.data)))
       .catch((err) => console.log(err.message));
   }, []);
 
   useEffect(() => {
     fetch('/api/posts/')
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data);
-        dispatch(setCurrentPosts(data.data));
-      })
+      .then((data) => dispatch(setCurrentPosts(data.data)))
       .catch((err) => console.log(err.message));
   }, []);
 

@@ -9,7 +9,6 @@ import { selectCurrentUser } from '@/store/currentUserSlice';
 
 const DashboardHead = () => {
   const currentUser = useSelector(selectCurrentUser);
-  console.log(currentUser);
   return (
     <div className='flex bg-gray-800 md:bg-transparent border-b md:border-none border-gray-700 md:shadow-none justify-between md:justify-center items-center py-2'>
       <div className='md:hidden'>
