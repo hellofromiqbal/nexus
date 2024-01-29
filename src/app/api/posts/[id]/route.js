@@ -52,30 +52,48 @@ export const GET = async (request, { params }) => {
   };
 };
 
+async function deleteReplyAndChildren(replyId) {
+  const reply = await Reply.findById(replyId);
+
+  if (!reply) {
+    return; // Reply not found, nothing to delete
+  }
+
+  // Recursively delete children
+  await Promise.all(reply.replies.map(async (childId) => {
+    await deleteReplyAndChildren(childId);
+  }));
+
+  // Delete the current reply
+  await Reply.findByIdAndDelete(replyId);
+}
+
 export const POST = async (request, { params }) => {
   try {
     await connectMongoDB();
     const document = await Post.findById(params.id);
-    if(!document) {
+    if (!document) {
       return NextResponse.json({
         success: false,
         message: 'Post not found.'
       }, { status: 404 });
-    };
+    }
 
     const { currentUserId } = await request.json();
     const currentUser = await User.findById(currentUserId);
-    if(!currentUser) {
+    if (!currentUser) {
       return NextResponse.json({
         success: false,
         message: 'User not found.'
       }, { status: 404 });
-    };
+    }
 
+    // Remove the post reference from the user
     currentUser.posts.pull(params.id);
     currentUser.likedPosts.pull({ post: params.id });
-    currentUser.save();
+    await currentUser.save();
 
+    // Remove post references from users who liked the post
     const postLikes = document.likes;
     await Promise.all(postLikes.map(async (like) => {
       const user = await User.findById(like.author);
@@ -85,10 +103,15 @@ export const POST = async (request, { params }) => {
       }
     }));
 
+    // Start the recursive deletion of replies
     const postReplies = document.replies;
-    await Reply.deleteMany({ _id: { $in: postReplies } });
+    await Promise.all(postReplies.map(async (replyId) => {
+      await deleteReplyAndChildren(replyId);
+    }));
 
+    // Delete the post
     await Post.findByIdAndDelete(params.id);
+
     return NextResponse.json({
       success: true,
       message: 'Post deleted.'
