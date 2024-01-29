@@ -4,7 +4,7 @@ import MainDashboardContent from '../components/MainDashboardContent/MainDashboa
 
 const DashboardPage = () => {
   return (
-    <div className='flex flex-col bg-gray-800 shadow-md rounded-md'>
+    <div className='flex flex-col bg-gray-800 shadow-md md:rounded-md'>
       <div className='p-4'>
         <CreatePostForm/>
       </div>
