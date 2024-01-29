@@ -27,6 +27,11 @@ export const PUT = async (request, response) => {
     isContentRefExist.replies.pull(contentId);
     isContentRefExist.save();
 
+    const contentReplies = isContentExist.replies;
+    await Promise.all(contentReplies.map(async (reply) => {
+      await Reply.findByIdAndDelete(reply);
+    }));
+
     await Reply.findByIdAndDelete(contentId);
 
     return NextResponse.json({
