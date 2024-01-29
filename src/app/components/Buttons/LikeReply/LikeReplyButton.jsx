@@ -14,7 +14,6 @@ const LikeReplyButton = ({ details, contentIn }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const isReplyAlreadyLiked = details?.likes?.find((like) => like?.author?._id === currentUser?._id);
-  console.log(details);
 
   const handleLikeButton = async () => {
     try {

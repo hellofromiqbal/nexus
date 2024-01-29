@@ -29,8 +29,6 @@ const visitedPostSlice = createSlice({
       state.visitedPostInfo.likes = updatedLikes;
     },
     addNewLikeOnReplyInVisitedPost: (state, action) => {
-      console.log(state.visitedPostInfo.replies);
-      console.log(action.payload);
       state.visitedPostInfo.replies.map((reply) => {
         if(reply._id === action.payload.replyId) {
           reply.likes.unshift({ _id: nanoid(), author: action.payload.currentUser, createdAt: new Date().toISOString() });

@@ -35,7 +35,6 @@ const currentPostsSlice = createSlice({
           post.replies.unshift(action.payload.replyId);
         };
       });
-      console.log(state.posts);
     },
     deleteReplyOnPostInCurrentPosts: (state, action) => {
       state.posts.map((post) => {
