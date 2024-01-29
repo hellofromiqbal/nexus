@@ -44,7 +44,7 @@ const Navbar = () => {
           <NavLink
             key={navLink.name}
             name={navLink.name}
-            url={navLink.url}
+            url={navLink.name === 'profile' ? navLink.url + `/${currentUser?.username}` : navLink.url}
           />
         ))}
         <li className='flex'>
