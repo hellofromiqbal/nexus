@@ -13,6 +13,6 @@ export const GET = async (request, response) => {
     return NextResponse.json({
       success: false,
       message: 'Failed to logout.'
-    });
+    }, { status: 500 });
   };
 };
