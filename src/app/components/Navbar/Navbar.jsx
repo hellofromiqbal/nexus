@@ -2,18 +2,10 @@
 'use client'
 
 import React, { useEffect } from 'react';
-import Link from 'next/link';
-import {
-  IoHome,
-  IoSearch,
-  IoNotifications,
-  IoMail,
-} from "react-icons/io5";
-import { FaUserFriends, FaUserCircle } from "react-icons/fa";
 import LogoutButton from '../Buttons/Logout/LogoutButton';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentUser, selectCurrentUser } from '@/store/currentUserSlice';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '@/store/currentUserSlice';
 import { setCurrentPosts } from '@/store/currentPostsSlice';
 import staticData from '@/assets/data/staticData';
 import NavLink from '../NavLink/NavLink';
@@ -35,8 +27,6 @@ const Navbar = () => {
       .catch((err) => console.log(err.message));
   }, []);
 
-  const currentUser = useSelector(selectCurrentUser);
-
   return (
     <nav>
       <ul className='flex flex-col'>
@@ -44,7 +34,7 @@ const Navbar = () => {
           <NavLink
             key={navLink.name}
             name={navLink.name}
-            url={navLink.name === 'profile' ? navLink.url + `/${currentUser?.username}` : navLink.url}
+            url={navLink.url}
           />
         ))}
         <li className='flex'>

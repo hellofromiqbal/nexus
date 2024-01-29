@@ -7,8 +7,16 @@ import {
   IoMail,
 } from "react-icons/io5";
 import { FaUserFriends, FaUserCircle } from "react-icons/fa";
+import { usePathname } from 'next/navigation';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '@/store/currentUserSlice';
 
 const NavLink = ({ name, url }) => {
+  const pathname = usePathname();
+  const currentUser = useSelector(selectCurrentUser);
+  if(name === 'profile') {
+    url = `${url}/${currentUser?.username}`
+  };
   const icons = {
     home: <IoHome className='w-[25px] h-[25px]'/>,
     explore: <IoSearch className='w-[25px] h-[25px]'/>,
@@ -17,10 +25,10 @@ const NavLink = ({ name, url }) => {
     friends: <FaUserFriends className='w-[25px] h-[25px]'/>,
     profile: <FaUserCircle className='w-[25px] h-[25px]'/>
   };
-
+  
   return (
     <li className='flex'>
-      <Link href={url} className='p-4 w-full font-medium text-white hover:text-black hover:bg-green-500 flex items-center gap-4'>
+      <Link href={url} className={`p-4 w-full font-medium hover:text-black ${pathname === url ? 'bg-green-500 text-black' : 'text-white'} hover:bg-green-500 flex items-center gap-4`}>
         {icons[name]}
         <span className='capitalize'>{name}</span>
       </Link>
