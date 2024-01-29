@@ -22,7 +22,7 @@ const ContentCard = ({ details, type, contentIn }) => {
         <div className='flex items-center gap-1'>
           <Link href={`/dashboard/profile/${details?.author?.username}`} className={`text-white text-nowrap font-medium ${details?.author?.fullname?.length > 20 ? 'w-[120px] md:w-[30%]' : ''} overflow-hidden text-ellipsis`}>{details?.author?.fullname}</Link>
           <span className='text-white text-opacity-70'>·</span>
-          <Link href={`/dashboard/profile/${details?.author?.username}`} className={`text-sm text-white text-opacity-70 ${details?.author?.username?.length > 20 ? 'w-[60px] md:w-[30%]' : ''} overflow-hidden text-ellipsis`}>{details?.author?.username}</Link>
+          <Link href={`/dashboard/profile/${details?.author?.username}`} className={`text-sm text-white text-opacity-70 ${details?.author?.username?.length > 12 ? 'w-[60px] md:w-[20%]' : ''} overflow-hidden text-ellipsis`}>{details?.author?.username}</Link>
           <span className='text-white text-opacity-70'>·</span>
           <p className='text-sm text-white text-nowrap text-opacity-70'>{timePosted(details?.createdAt)}</p>
         </div>
