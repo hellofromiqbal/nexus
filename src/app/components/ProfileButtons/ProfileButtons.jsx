@@ -10,7 +10,7 @@ const ProfileButtons = ({ contentFocus, handleContentFocus }) => {
       <button
         className={`py-4 w-full font-medium flex justify-center ${contentFocus === 'likes' ? 'bg-green-500 text-black' : 'text-white hover:text-black bg-transparent hover:bg-green-500'}`}
         onClick={() => handleContentFocus('likes')}
-      >Likes</button>
+      >Liked Posts</button>
     </>
   )
 };
