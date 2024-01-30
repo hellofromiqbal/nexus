@@ -12,7 +12,7 @@ const DashboardLayout = ({ children }) => {
         <div className='flex md:gap-4'>
           <div className='md:block md:basis-[25%] lg:basis-[25%] relative'>
             <div className='bg-gray-800 md:rounded-md shadow-md overflow-hidden h-max fixed md:sticky bottom-0 left-0 right-0 md:top-4'>
-              {/* <Navbar/> */}
+              <Navbar/>
             </div>
           </div>
           <div className='basis-full md:basis-[75%] lg:basis-[50%]'>
