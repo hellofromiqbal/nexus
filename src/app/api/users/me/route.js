@@ -4,6 +4,8 @@ import Reply from '@/models/replyModel';
 import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (request, response) => {
   try {
     const currentUserToken = await request.cookies.get('nexus');

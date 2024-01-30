@@ -4,6 +4,8 @@ import User from "@/models/userModel";
 import Reply from "@/models/replyModel";
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (request, response) => {
   try {
     await connectMongoDB();
