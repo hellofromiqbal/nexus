@@ -46,7 +46,7 @@ const CreatePostForm = () => {
 
   return (
     <form
-      className='flex flex-col gap-4 w-full'
+      className='hidden md:flex flex-col gap-4 w-full'
       onSubmit={handleSubmit(submittedData)}
     >
       <textarea

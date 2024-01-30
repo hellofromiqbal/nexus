@@ -10,7 +10,7 @@ import { selectCurrentUser } from '@/store/currentUserSlice';
 const DashboardHead = () => {
   const currentUser = useSelector(selectCurrentUser);
   return (
-    <div className='flex bg-gray-800 md:bg-transparent border-b md:border-none border-gray-700 md:shadow-none justify-between md:justify-center items-center py-2'>
+    <div className='flex bg-gray-800 md:bg-transparent border-gray-700 shadow-md md:shadow-none justify-between md:justify-center items-center md:py-2 z-10'>
       <div className='md:hidden'>
         <Link href={`/dashboard/profile/${currentUser?.username}`} className={`p-4 text-white font-medium flex items-center gap-4`}>
           <FaUserCircle className='w-[35px] h-[35px]'/>
