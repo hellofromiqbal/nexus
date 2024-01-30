@@ -9,8 +9,7 @@ const ProfilePage = () => {
         <BackButton/>
       </div>
       <div>
-        {/* <MainProfile/> */}
-        <h1>test</h1>
+        <MainProfile/>
       </div>
     </div>
   )
