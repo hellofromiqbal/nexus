@@ -10,14 +10,14 @@ export const FetcherProvider = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch('/api/users/me', { cache: 'no-store' })
+    fetch('/api/users/me', { next: { revalidate: 0 }, cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => dispatch(setCurrentUser(data.data)))
       .catch((err) => console.log(err.message));
   }, []);
 
   useEffect(() => {
-    fetch('/api/posts/', { cache: 'no-store' })
+    fetch('/api/posts/', { next: { revalidate: 0 }, cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => dispatch(setCurrentPosts(data.data)))
       .catch((err) => console.log(err.message));
