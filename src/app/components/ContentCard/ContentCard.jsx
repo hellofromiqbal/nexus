@@ -14,22 +14,22 @@ import LikeReplyButton from '../Buttons/LikeReply/LikeReplyButton';
 const ContentCard = ({ details, type, contentIn }) => {
   const currentUser = useSelector(selectCurrentUser);
   return (
-    <div className='p-4 flex gap-4 border-t border-gray-700'>
+    <div className='p-4 flex gap-2 md:gap-4 border-t border-gray-700'>
       <div>
-        <div className='w-[50px] h-[50px] bg-gray-200 rounded-full'></div>
+        <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] bg-gray-200 rounded-full'></div>
       </div>
       <div className='flex flex-col w-full'>
-        <div className='flex items-center gap-1'>
-          <Link href={`/dashboard/profile/${details?.author?.username}`} className={`text-white text-nowrap font-medium ${details?.author?.fullname?.length > 20 ? 'w-[120px] md:w-[30%]' : ''} overflow-hidden text-ellipsis`}>{details?.author?.fullname}</Link>
-          <span className='text-white text-opacity-70'>·</span>
-          <Link href={`/dashboard/profile/${details?.author?.username}`} className={`text-sm text-white text-opacity-70 ${details?.author?.username?.length > 12 ? 'w-[60px] md:w-[20%]' : ''} overflow-hidden text-ellipsis`}>{details?.author?.username}</Link>
-          <span className='text-white text-opacity-70'>·</span>
-          <p className='text-sm text-white text-nowrap text-opacity-70'>{timePosted(details?.createdAt)}</p>
+        <div className='flex justify-between items-center gap-1'>
+          <div className='flex flex-col md:flex-row md:items-center md:gap-2'>
+            <Link href={`/dashboard/profile/${details?.author?.username}`} className={`text-white text-nowrap font-medium ${details?.author?.fullname?.length > 20 ? 'w-[120px]' : ''} overflow-hidden text-ellipsis`}>{details?.author?.fullname}</Link>
+            <Link href={`/dashboard/profile/${details?.author?.username}`} className={`text-xs md:text-sm text-white text-opacity-70 ${details?.author?.username?.length > 12 ? 'w-[120px]' : ''} overflow-hidden text-ellipsis`}>{details?.author?.username}</Link>
+          </div>
+          <p className='place-self-start text-xs md:text-sm text-white text-nowrap text-opacity-70'>{timePosted(details?.createdAt)}</p>
         </div>
         <div>
           <p className='text-white text-opacity-70'>{details?.textContent}</p>
         </div>
-        <div className='flex justify-end gap-8'>
+        <div className='flex justify-end gap-8 mt-4'>
           {type === 'post' ?
             <>
               <LikePostButton details={details}/>

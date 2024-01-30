@@ -25,10 +25,10 @@ const LogoutButton = ({ location = 'normal' }) => {
 
   return (
     <button
-      className={`p-4 ${location === 'normal' ? 'hidden md:flex w-full' : 'rounded-md'} font-medium text-white hover:text-black hover:bg-green-500 items-center gap-4`}
+      className={`p-4 ${location === 'normal' ? 'hidden md:flex w-full hover:text-black hover:bg-green-500' : 'rounded-md'} font-medium text-white items-center gap-4`}
       onClick={handleLogout}
     >
-      <IoExit className='w-[25px] h-[25px]'/>
+      <IoExit className={location === 'normal' ? 'w-[25px] h-[25px]' : 'w-[35px] h-[35px]'}/>
       {location === 'normal' ?
         <span>Logout</span>
         :
