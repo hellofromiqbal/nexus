@@ -14,7 +14,7 @@ import LikeReplyButton from '../Buttons/LikeReply/LikeReplyButton';
 const ContentCard = ({ details, type, contentIn }) => {
   const currentUser = useSelector(selectCurrentUser);
   return (
-    <div className='p-4 flex gap-2 md:gap-4 border-t border-gray-700'>
+    <div className='p-4 flex gap-4 border-t border-gray-700'>
       <div>
         <div className='w-[40px] md:w-[50px] h-[40px] md:h-[50px] bg-gray-200 rounded-full'></div>
       </div>
